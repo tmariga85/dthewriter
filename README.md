@@ -85,12 +85,19 @@ supplied PDFs (see below).
 | `canvas-pebbles.jpg` | Pebbles of Yesterday |
 | `canvas-gentle.jpg` | Let Our Hearts Be Gentle |
 | `canvas-dad.jpg` | Dad, You Are The Man |
+| `home-living.jpg` | Styled living room &mdash; low resolution, see below |
+| `home-pantry.jpg` | Organised pantry &mdash; low resolution, see below |
 
 A missing file falls back to a styled placeholder naming what belongs there, so further
 photography can be dropped in later with no markup change.
 
-The home services section has been removed at the client's request, along with its entry in
-the page navigation.
+The home services section sits beside the Christmas Collection in a two-column row, with two
+interior photographs above its copy.
+
+**Those two photographs are low resolution.** They were cropped out of a composite mock-up of
+the section rather than supplied as files, so each is about 210x132 native, upscaled to 460px
+wide. They hold up at the size they display but will look soft on a high-density screen.
+Replace `home-living.jpg` and `home-pantry.jpg` with the originals when they are available.
 
 The four canvases run as a carousel ([`assets/js/canvas-carousel.js`](assets/js/canvas-carousel.js)):
 the centred canvas is scaled up while its neighbours shrink, tilt away and fade. It is
