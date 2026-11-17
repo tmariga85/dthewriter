@@ -61,3 +61,30 @@ Domain and email stay with Afrihost. Only the web records point here:
 | CNAME | `www` | `tmariga85.github.io` |
 
 Mail (`MX`) and `SPF` records are untouched, so email keeps running on Afrihost.
+
+## Elevating Spaces page
+
+`elevating-spaces.html` is a standalone page for the Elevating Spaces brand, with its own
+stylesheet at `assets/css/elevating-spaces.css`. It is linked from both menus on the landing
+page and listed in the sitemap.
+
+Photographs are not committed yet. Each slot falls back to a styled placeholder naming what
+belongs there; drop a file into `assets/images/elevating/` under the matching name and it
+replaces the placeholder with no markup change:
+
+| File | Used for |
+|---|---|
+| `hero-gift-box.jpg` | Hero photograph |
+| `teacher-thoughtful.jpg` | The Thoughtful Gift |
+| `teacher-appreciation.jpg` | The Appreciation Gift |
+| `teacher-signature.jpg` | The Signature Gift |
+| `corporate-appreciation.jpg` | The Appreciation Box |
+| `corporate-signature.jpg` | The Signature Box |
+| `voice-we-are-seeds.jpg` | Canvas artwork |
+| `christmas-box.jpg` | Christmas Collection |
+| `home-living.jpg` | Styled living room |
+| `home-pantry.jpg` | Organised pantry |
+
+Every call to action opens a mail client addressed to deethewriter85@gmail.com with a subject
+and prefilled checklist for that collection. The footer carries Contact, Instagram (handle still
+to be supplied) and WhatsApp on +27 67 182 0542.
