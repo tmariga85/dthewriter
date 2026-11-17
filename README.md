@@ -35,6 +35,18 @@ To change the recipient, edit `RECIPIENT` at the top of that file. With
 JavaScript disabled the forms fall back to a plain `mailto:` POST to the same
 address.
 
+## Floating WhatsApp button
+
+Both pages carry a WhatsApp button fixed to the bottom-right corner, styled by
+[`assets/css/whatsapp-float.css`](assets/css/whatsapp-float.css). The number and the opening
+message live in the `href` on each page, not in the stylesheet, so the two pages open with
+different wording against the same number (+27 67 182 0542).
+
+Its `z-index` is 900, chosen to sit above the theme side rail (10) and the Elevating Spaces
+sticky header (50) while staying below the contact modal (999), so the modal still covers it.
+On a pointer device it reveals a "Chat with us" label on hover; on touch that label is hidden,
+since there is no hover to reveal it with.
+
 ## Books carousel
 
 The `#books` section replaced the theme's interior-design demo section. Covers live
@@ -129,10 +141,6 @@ Two notes on the source files:
 - The other four PDFs store their photographs as CMYK, two as `DCTDecode` and two as
   `FlateDecode` with a PNG predictor. Converting those by hand gives the wrong colours;
   letting pdf.js do the decoding is what gets them right.
-
-A floating WhatsApp button sits in the bottom-right corner on every scroll position, linking
-to https://wa.me/27671820542 with an opening message. On a pointer device it reveals a "Chat
-with us" label on hover; on touch the label is hidden, since there is no hover there.
 
 Every call to action opens a mail client addressed to deethewriter85@gmail.com with a subject
 and prefilled checklist for that collection. The footer carries Contact, Instagram (handle
