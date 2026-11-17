@@ -266,9 +266,31 @@ body.es-page {
 }
 .es-christmas-note p { font-family: var(--es-serif); font-style: italic; color: var(--es-ink-soft); margin: 0; }
 
-.es-home-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-.es-home-grid .es-photo { aspect-ratio: 4 / 3; }
-.es-home-copy { margin: 20px 0 0; text-align: center; font-size: 15px; color: var(--es-ink-soft); }
+.es-home-copy { margin: 0 0 26px; text-align: center; font-size: 15px; color: var(--es-ink-soft); }
+
+/* The four services, listed rather than illustrated: there is no
+   photography of finished rooms yet. */
+.es-services {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+.es-services li {
+  background: var(--es-card);
+  border: 1px solid var(--es-rule);
+  border-left: 3px solid var(--es-olive-soft);
+  border-radius: 3px;
+  padding: 14px 16px;
+  transition: border-left-color .2s ease, transform .2s ease;
+}
+.es-services li:hover { border-left-color: var(--es-gold); transform: translateX(2px); }
+.es-service-name {
+  display: block;
+  font-family: var(--es-serif); font-size: 17px; color: var(--es-ink);
+}
+.es-service-note {
+  display: block; margin-top: 3px;
+  font-size: 13.5px; line-height: 1.5; color: var(--es-ink-soft);
+}
 
 /* ---------- closing band ---------- */
 
@@ -355,7 +377,7 @@ body.es-page {
 @media (max-width: 520px) {
   .es-brand-name { font-size: 20px; }
   .es-section { padding: 44px 0; }
-  .es-home-grid { grid-template-columns: 1fr; }
+  .es-services { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -85,11 +85,14 @@ supplied PDFs (see below).
 | `canvas-pebbles.jpg` | Pebbles of Yesterday |
 | `canvas-gentle.jpg` | Let Our Hearts Be Gentle |
 | `canvas-dad.jpg` | Dad, You Are The Man |
-| `home-living.jpg` | Styled living room — **not supplied yet** |
-| `home-pantry.jpg` | Organised pantry — **not supplied yet** |
 
-A missing file falls back to a styled placeholder naming what belongs there, so the two
-outstanding interior shots can be dropped in later with no markup change.
+A missing file falls back to a styled placeholder naming what belongs there, so further
+photography can be dropped in later with no markup change.
+
+The home services section lists the four services instead of illustrating them: none of the
+supplied photography shows a finished room, and every gift box shot fills its frame, so there
+is nothing to crop a room vignette from. If photographs of completed decluttering, organising
+or styling work arrive, that section can go back to images.
 
 ### Rendering the canvas PDFs
 
