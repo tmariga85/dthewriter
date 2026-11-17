@@ -89,10 +89,17 @@ supplied PDFs (see below).
 A missing file falls back to a styled placeholder naming what belongs there, so further
 photography can be dropped in later with no markup change.
 
-The home services section lists the four services instead of illustrating them: none of the
-supplied photography shows a finished room, and every gift box shot fills its frame, so there
-is nothing to crop a room vignette from. If photographs of completed decluttering, organising
-or styling work arrive, that section can go back to images.
+The home services section has been removed at the client's request, along with its entry in
+the page navigation.
+
+The four canvases run as a carousel ([`assets/js/canvas-carousel.js`](assets/js/canvas-carousel.js)):
+the centred canvas is scaled up while its neighbours shrink, tilt away and fade. It is
+hand-rolled rather than taken from a library, because the two failures that matter here are
+the ones libraries tend to have — autoplay that never restarts after an interaction, and
+clicks swallowed when a finger moves a few pixels. The slides are tripled so the run loops
+continuously, snapping back by one set with the transition off once it leaves the middle copy.
+A press within 12px counts as a click: on a side canvas it centres it, on the centred one it
+opens that canvas's enquiry.
 
 ### Rendering the canvas PDFs
 

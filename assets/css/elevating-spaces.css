@@ -230,34 +230,102 @@ body.es-page {
   font-size: 16px; color: var(--es-ink-soft);
 }
 
-/* Aligned to the bottom so the titles line up like a shelf, since the
-   canvases themselves are different heights. */
-.es-canvases {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px;
-  align-items: end;
+/* The canvases run as a carousel: the centred one is shown full size,
+   its neighbours shrink, tilt away and fade. */
+.es-carousel { position: relative; }
+
+.es-car-viewport {
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0 10px;
 }
-.es-canvas { display: block; text-decoration: none; }
-/* The canvases are not all the same shape, so each keeps its own
-   proportions rather than being cropped into a common frame. */
+
+.es-car-track {
+  display: flex; align-items: center; gap: 34px;
+  width: max-content;
+  will-change: transform;
+  transition: transform .62s cubic-bezier(.22, .68, .32, 1);
+}
+.es-car-track.is-dragging { transition: none; }
+
+.es-canvas {
+  display: block; text-decoration: none;
+  flex: 0 0 auto; width: 300px;
+  transform-origin: center center;
+  transition: transform .62s cubic-bezier(.22, .68, .32, 1), opacity .5s ease;
+}
+
 .es-canvas .es-photo {
-  box-shadow: var(--es-shadow);
-  transition: transform .3s ease, box-shadow .3s ease;
+  box-shadow: 0 16px 36px -20px rgba(67, 55, 42, .55);
+  transition: box-shadow .45s ease;
 }
-.es-canvas .es-photo img { width: 100%; height: auto; object-fit: contain; }
-.es-canvas:hover .es-photo, .es-canvas:focus-visible .es-photo {
-  transform: translateY(-6px) scale(1.015);
-  box-shadow: 0 26px 52px -24px rgba(67, 55, 42, .6);
+.es-canvas .es-photo img {
+  width: 100%; height: auto; object-fit: contain;
+  pointer-events: none; /* the carousel owns the press, not the image */
+  -webkit-user-drag: none; user-select: none;
 }
-.es-canvas .es-photo img { transition: transform .5s ease; }
-.es-canvas:hover .es-photo img { transform: scale(1.04); }
+.es-canvas.is-centre .es-photo {
+  box-shadow: 0 34px 64px -26px rgba(67, 55, 42, .72);
+}
+
 .es-canvas-title {
-  margin: 14px 0 0; text-align: center;
+  margin: 16px 0 0; text-align: center;
   font-family: var(--es-serif); font-style: italic;
   font-size: 17px; color: var(--es-ink);
+  opacity: 0; transition: opacity .45s ease, color .2s ease;
 }
-.es-canvas:hover .es-canvas-title { color: var(--es-olive); }
+.es-canvas.is-centre .es-canvas-title { opacity: 1; }
+.es-canvas.is-centre:hover .es-canvas-title { color: var(--es-olive); }
 
-.es-christmas { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: center; }
+/* Arrows, sitting over the faded edges of the row */
+.es-car-nav {
+  position: absolute; top: 50%; z-index: 30;
+  width: 46px; height: 46px; padding: 0;
+  display: grid; place-items: center;
+  background: rgba(255, 255, 255, .92); color: var(--es-olive);
+  border: 1px solid var(--es-rule); border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 6px 18px -10px rgba(67, 55, 42, .7);
+  transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+}
+.es-car-prev { left: 0; transform: translate(-6px, -50%); }
+.es-car-next { right: 0; transform: translate(6px, -50%); }
+.es-car-nav svg { width: 22px; height: 22px; }
+.es-car-nav:hover, .es-car-nav:focus-visible {
+  background: var(--es-olive); color: #fff; border-color: var(--es-olive);
+}
+.es-car-prev:hover, .es-car-prev:focus-visible { transform: translate(-6px, -50%) scale(1.07); }
+.es-car-next:hover, .es-car-next:focus-visible { transform: translate(6px, -50%) scale(1.07); }
+
+/* Dots */
+.es-car-dots {
+  display: flex; justify-content: center; gap: 10px;
+  margin-top: 18px;
+}
+.es-car-dot {
+  width: 9px; height: 9px; padding: 0;
+  border: 1px solid var(--es-olive-soft); border-radius: 50%;
+  background: transparent; cursor: pointer;
+  transition: background .25s ease, transform .25s ease, border-color .25s ease;
+}
+.es-car-dot.is-on {
+  background: var(--es-olive); border-color: var(--es-olive);
+  transform: scale(1.25);
+}
+
+/* Before the script runs, show the canvases in a plain row rather than a
+   stack, so the section is never broken with JavaScript off. */
+.es-carousel:not(.is-ready) .es-car-track {
+  gap: 20px; width: 100%; justify-content: center; flex-wrap: wrap;
+}
+.es-carousel:not(.is-ready) .es-canvas { width: 22%; }
+.es-carousel:not(.is-ready) .es-canvas-title { opacity: 1; }
+.es-carousel:not(.is-ready) .es-car-nav { display: none; }
+
+.es-christmas {
+  display: grid; grid-template-columns: 1.1fr .9fr; gap: 36px;
+  align-items: center; max-width: 880px; margin: 0 auto;
+}
 .es-christmas .es-photo { aspect-ratio: 3 / 2; }
 .es-christmas-note { text-align: center; }
 .es-christmas-note .es-soon {
@@ -267,30 +335,6 @@ body.es-page {
 .es-christmas-note p { font-family: var(--es-serif); font-style: italic; color: var(--es-ink-soft); margin: 0; }
 
 .es-home-copy { margin: 0 0 26px; text-align: center; font-size: 15px; color: var(--es-ink-soft); }
-
-/* The four services, listed rather than illustrated: there is no
-   photography of finished rooms yet. */
-.es-services {
-  list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
-}
-.es-services li {
-  background: var(--es-card);
-  border: 1px solid var(--es-rule);
-  border-left: 3px solid var(--es-olive-soft);
-  border-radius: 3px;
-  padding: 14px 16px;
-  transition: border-left-color .2s ease, transform .2s ease;
-}
-.es-services li:hover { border-left-color: var(--es-gold); transform: translateX(2px); }
-.es-service-name {
-  display: block;
-  font-family: var(--es-serif); font-size: 17px; color: var(--es-ink);
-}
-.es-service-note {
-  display: block; margin-top: 3px;
-  font-size: 13.5px; line-height: 1.5; color: var(--es-ink-soft);
-}
 
 /* ---------- closing band ---------- */
 
@@ -346,7 +390,8 @@ body.es-page {
 /* ---------- responsive ---------- */
 
 @media (max-width: 1023px) {
-  .es-canvases { grid-template-columns: repeat(2, 1fr); }
+  .es-canvas { width: 260px; }
+  .es-car-track { gap: 24px; }
   .es-hero { grid-template-columns: 1fr; }
   .es-hero-media { min-height: 300px; }
   .es-hero-body { padding: 48px 28px; }
@@ -366,7 +411,9 @@ body.es-page {
   .es-nav.is-open ul { flex-direction: column; align-items: flex-start; gap: 14px; }
   .es-nav-toggle { display: inline-block; }
   .es-cards-3, .es-cards-2 { grid-template-columns: 1fr; }
-  .es-canvases { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .es-canvas { width: 62vw; }
+  .es-car-track { gap: 18px; }
+  .es-car-nav { width: 40px; height: 40px; }
   .es-christmas { grid-template-columns: 1fr; }
   .es-head h2 { gap: 14px; font-size: 26px; }
   .es-head h2::before, .es-head h2::after { max-width: 40px; }
@@ -377,7 +424,18 @@ body.es-page {
 @media (max-width: 520px) {
   .es-brand-name { font-size: 20px; }
   .es-section { padding: 44px 0; }
-  .es-services { grid-template-columns: 1fr; }
+}
+
+/* Below about 360px the wordmark and the Menu button stop fitting on one
+   line, which pushes the button past the edge and scrolls the page. */
+@media (max-width: 400px) {
+  .es-header-inner { gap: 10px; }
+  .es-brand { min-width: 0; gap: 8px; }
+  .es-brand svg { width: 26px; height: 34px; }
+  .es-brand-name { font-size: 16px; letter-spacing: .1em; }
+  .es-brand-tag { font-size: 11px; margin-top: 3px; }
+  .es-nav-toggle { padding: 7px 10px; font-size: 13px; }
+  .es-wrap { padding: 0 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -385,4 +443,5 @@ body.es-page {
   .es-reveal, .es-reveal.is-in { opacity: 1; transform: none; transition: none; }
   .es-card, .es-btn { transition: none; }
   .es-card:hover, .es-btn:hover { transform: none; }
+  .es-car-track, .es-canvas { transition: none; }
 }

@@ -43,7 +43,6 @@
         <li><a href="#top" class="is-current">Home</a></li>
         <li><a href="#gift-collections">Gift Collections</a></li>
         <li><a href="#voice-of-inspiration">The Voice of Inspiration</a></li>
-        <li><a href="#services">Services</a></li>
         <li><a href="#our-story">Our Story</a></li>
         <li><a href="#enquire">Enquire</a></li>
       </ul>
@@ -177,7 +176,13 @@
 
         <p class="es-voice-intro es-reveal">Original inspirational canvas wall art created to awaken hope, encourage fresh perspectives and bring beauty and purpose into everyday spaces.</p>
 
-        <div class="es-canvases es-reveal">
+        <div class="es-carousel es-reveal" data-canvas-carousel>
+          <button class="es-car-nav es-car-prev" type="button" aria-label="Previous canvas" aria-controls="es-car-track">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 5 8 12l7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <div class="es-car-viewport">
+            <div class="es-car-track" id="es-car-track">
 
           <a class="es-canvas" href="mailto:deethewriter85@gmail.com?subject=Enquiry%3A%20%27We%20are%20all%20seeds%27%20canvas&amp;body=Hi%20Elevating%20Spaces%2C%0A%0AI%27d%20like%20to%20enquire%20about%20the%20%27We%20are%20all%20seeds%27%20canvas.%0A%0ASize%20of%20interest%3A%0ARoom%20or%20space%3A%0A%0AThank%20you%2C%0A">
             <figure class="es-photo" data-slot="&lsquo;We are all seeds&rsquo; canvas">
@@ -205,8 +210,16 @@
               <img src="assets/images/elevating/canvas-dad.jpg" alt="Canvas artwork of a mountain road under a clear sky, lettered: Many words fill my mind, but you never had to say much. Dad, you are the Man.">
             </figure>
             <p class="es-canvas-title">Dad, You Are The Man</p>
-          </a>
+            </a>
 
+            </div>
+          </div>
+
+          <button class="es-car-nav es-car-next" type="button" aria-label="Next canvas" aria-controls="es-car-track">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m9 5 7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <div class="es-car-dots" role="tablist" aria-label="Choose a canvas"></div>
         </div>
 
         <div class="es-btn-row es-reveal">
@@ -217,9 +230,9 @@
     </div>
   </section>
 
-  <!-- ============ christmas + home services ============ -->
-  <section class="es-section" style="padding: 0;" id="services">
-    <div class="es-wrap es-split">
+  <!-- ============ christmas ============ -->
+  <section class="es-section" id="christmas-collection">
+    <div class="es-wrap">
 
       <div id="christmas">
         <div class="es-head es-reveal">
@@ -241,37 +254,6 @@
         </div>
       </div>
 
-      <div id="home-services">
-        <div class="es-head is-plain es-reveal">
-          <h2>Elevating the Spaces You Live In</h2>
-          <p>Decluttering, Home Organisation &amp; Home Improvement</p>
-        </div>
-
-        <p class="es-home-copy es-reveal">From decluttering and reorganising to home styling, interior revamps and practical improvements, we create spaces that are beautiful, functional and thoughtfully designed around your lifestyle.</p>
-
-        <ul class="es-services es-reveal">
-          <li>
-            <span class="es-service-name">Decluttering</span>
-            <span class="es-service-note">Clearing what no longer serves the room, room by room.</span>
-          </li>
-          <li>
-            <span class="es-service-name">Home Organisation</span>
-            <span class="es-service-note">Storage and systems that hold up to everyday life.</span>
-          </li>
-          <li>
-            <span class="es-service-name">Home Styling</span>
-            <span class="es-service-note">Layout, colour and finishing touches that pull a space together.</span>
-          </li>
-          <li>
-            <span class="es-service-name">Home Improvement</span>
-            <span class="es-service-note">Practical revamps that make a home work harder and feel better.</span>
-          </li>
-        </ul>
-
-        <div class="es-btn-row es-reveal">
-          <a class="es-btn" href="mailto:deethewriter85@gmail.com?subject=Enquiry%3A%20Home%20Styling%20%26%20Organisation%20Services&amp;body=Hi%20Elevating%20Spaces%2C%0A%0AI%27d%20like%20to%20enquire%20about%20your%20home%20services.%0A%0AWhat%20I%20need%20(decluttering%20%2F%20organising%20%2F%20styling%20%2F%20revamp)%3A%0ARooms%20involved%3A%0ASuburb%3A%0APreferred%20dates%3A%0A%0AThank%20you%2C%0A">Enquire about our services</a>
-        </div>
-      </div>
 
     </div>
   </section>
@@ -360,6 +342,8 @@
     </p>
   </div>
 </footer>
+
+<script src="assets/js/canvas-carousel.js" defer></script>
 
 <script>
 (function () {
