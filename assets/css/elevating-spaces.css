@@ -16,6 +16,7 @@
   --es-shadow:     0 18px 40px -24px rgba(67, 55, 42, .45);
   --es-serif:      "Playfair Display", Georgia, serif;
   --es-body:       "Lora", Georgia, serif;
+  --es-sans:       "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -101,9 +102,9 @@ body.es-page {
 .es-btn {
   display: inline-flex; align-items: center; gap: 10px;
   background: var(--es-olive); color: #fff; text-decoration: none;
-  font-family: var(--es-body); font-size: 14px;
-  letter-spacing: .1em; text-transform: uppercase;
-  padding: 14px 28px; border-radius: 3px;
+  font-family: var(--es-sans); font-size: 13.5px; font-weight: 600;
+  letter-spacing: .07em; text-transform: uppercase;
+  padding: 13px 26px; border-radius: 3px;
   transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
   box-shadow: 0 10px 24px -16px rgba(70, 82, 44, .9);
 }
@@ -117,37 +118,52 @@ body.es-page {
 
 /* ---------- hero ---------- */
 
+/* A wide, shallow banner: the photograph runs to the left edge and the
+   copy sits on a cream-to-sage wash, as in the supplied design cue. */
 .es-hero {
-  display: grid; grid-template-columns: 1fr 1fr;
+  display: grid; grid-template-columns: 1.08fr .92fr;
   align-items: stretch;
-  background: linear-gradient(120deg, var(--es-cream-2) 0%, #eef0e2 55%, #e6ebd7 100%);
+  background: linear-gradient(100deg, #f2eee2 0%, #ece9d9 50%, #dbe1c8 100%);
   position: relative; overflow: hidden;
 }
-.es-hero-media { min-height: 420px; }
+.es-hero-media { min-height: 300px; }
 .es-hero-media .es-photo { height: 100%; border-radius: 0; }
 .es-hero-body {
   display: flex; flex-direction: column; justify-content: center;
-  padding: 72px 64px; text-align: center; position: relative; z-index: 2;
+  padding: 40px 48px; text-align: center; position: relative; z-index: 2;
 }
 .es-hero h1 {
   font-family: var(--es-serif); font-weight: 400;
-  font-size: clamp(34px, 4.2vw, 52px); line-height: 1.15;
-  color: #5a4a33; margin: 0;
+  font-size: clamp(30px, 3.5vw, 46px); line-height: 1.16;
+  color: #4a3a28; margin: 0;
 }
 .es-hero-rule {
-  width: 92px; height: 2px; background: var(--es-gold);
-  margin: 22px auto; border: 0;
+  width: 72px; height: 2px; background: var(--es-gold);
+  margin: 16px auto; border: 0;
 }
 .es-hero p {
   font-family: var(--es-serif); font-style: italic;
-  font-size: clamp(16px, 1.4vw, 19px); color: #5f5341;
-  margin: 0 auto 30px; max-width: 30em;
+  font-size: clamp(15px, 1.25vw, 18px); color: #5a4e3d;
+  margin: 0 auto 22px; max-width: 27em;
 }
 .es-hero .es-btn { align-self: center; }
-.es-hero-leaf {
-  position: absolute; right: -40px; top: -30px;
-  width: 220px; opacity: .22; color: var(--es-olive-soft);
-  pointer-events: none; z-index: 1;
+
+/* ---------- foliage ---------- */
+
+/* Every sprig is the same <symbol>, placed and turned by these rules.
+   They sit behind the copy (z-index 1) and never take pointer events. */
+.es-sprite { position: absolute; }
+.es-foliage {
+  position: absolute; z-index: 1; pointer-events: none;
+  color: #7f9158; overflow: visible;
+}
+.es-foliage-top {
+  top: -22px; right: -38px; width: 236px; height: 131px;
+  transform: scaleX(-1) rotate(12deg); opacity: .8;
+}
+.es-foliage-edge {
+  bottom: -30px; right: -48px; width: 152px; height: 85px;
+  transform: rotate(196deg); opacity: .42;
 }
 
 /* ---------- section furniture ---------- */
@@ -340,25 +356,32 @@ body.es-page {
 
 /* ---------- closing band ---------- */
 
+/* A slim cream strip: branch at the left, copy centred in the space that
+   is left once the button has taken the right-hand end. */
 .es-band {
-  background: linear-gradient(100deg, #e9ecdb 0%, #dfe6cd 100%);
-  padding: 44px 0; position: relative; overflow: hidden;
+  background: linear-gradient(90deg, #eae7d6 0%, #e4e1cd 58%, #dbd9c0 100%);
+  padding: 26px 0; position: relative; overflow: hidden;
 }
 .es-band-inner {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 40px; position: relative; z-index: 2;
+  display: flex; align-items: center; gap: 32px;
+  position: relative; z-index: 2;
 }
+/* The left padding offsets the button so the copy reads as centred on the
+   band rather than on the space the button leaves. */
+.es-band-copy { flex: 1 1 auto; min-width: 0; text-align: center; padding-left: 90px; }
 .es-band h2 {
-  font-family: var(--es-serif); font-weight: 400; font-size: clamp(24px, 2.6vw, 32px);
-  margin: 0 0 8px; color: var(--es-ink);
+  font-family: var(--es-serif); font-weight: 400; font-size: clamp(21px, 2.2vw, 28px);
+  margin: 0 0 6px; color: #3a3026;
 }
 .es-band p {
-  font-family: var(--es-serif); font-style: italic; margin: 0;
-  color: var(--es-ink-soft); max-width: 46em;
+  font-family: var(--es-serif); font-style: italic; margin: 0 auto;
+  font-size: clamp(14px, 1.15vw, 16px);
+  color: #5b5042; max-width: 44em;
 }
-.es-band-leaf {
-  position: absolute; left: -30px; top: -20px; width: 180px;
-  opacity: .25; color: var(--es-olive-soft); z-index: 1;
+.es-band .es-btn { flex: 0 0 auto; }
+.es-foliage-band {
+  top: -22px; left: -34px; width: 274px; height: 152px;
+  transform: rotate(7deg); opacity: .95;
 }
 
 /* ---------- footer ---------- */
@@ -395,12 +418,19 @@ body.es-page {
   .es-canvas { width: 260px; }
   .es-car-track { gap: 24px; }
   .es-hero { grid-template-columns: 1fr; }
-  .es-hero-media { min-height: 300px; }
-  .es-hero-body { padding: 48px 28px; }
+  .es-hero-media { min-height: 280px; }
+  .es-hero-body { padding: 44px 28px; }
+  /* Stacked, the top sprig would land over the photograph, so the only
+     foliage left is the one at the foot of the copy. */
+  .es-foliage-top { display: none; }
+  .es-foliage-edge { width: 132px; height: 74px; right: -34px; bottom: -22px; opacity: .4; }
   .es-split { grid-template-columns: 1fr; }
   .es-split > :first-child { padding-right: 0; border-right: 0; border-bottom: 1px solid var(--es-rule); }
   .es-split > :last-child { padding-left: 0; }
-  .es-band-inner { flex-direction: column; text-align: center; }
+  .es-band { padding: 34px 0; }
+  .es-band-inner { flex-direction: column; text-align: center; gap: 22px; }
+  .es-band-copy { padding-left: 0; }
+  .es-foliage-band { width: 164px; height: 91px; left: -72px; top: -34px; opacity: .45; }
 }
 
 @media (max-width: 860px) {

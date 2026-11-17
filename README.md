@@ -86,7 +86,7 @@ supplied PDFs (see below).
 
 | File | Used for |
 |---|---|
-| `hero-gift-box.jpg` | Hero photograph (right-hand crop of the main banner) |
+| `hero-gift-box.jpg` | Hero photograph &mdash; a 1.6:1 crop of the main banner (x 500, y 40, 1170&times;731), wide enough for the shallow banner |
 | `teacher-thoughtful.jpg` | The Thoughtful Gift |
 | `teacher-appreciation.jpg` | The Appreciation Gift |
 | `teacher-signature.jpg` | The Signature Gift |
@@ -119,6 +119,23 @@ clicks swallowed when a finger moves a few pixels. The slides are tripled so the
 continuously, snapping back by one set with the transition off once it leaves the middle copy.
 A press within 12px counts as a click: on a side canvas it centres it, on the centred one it
 opens that canvas's enquiry.
+
+### Banner and closing band
+
+Both follow design cues supplied as images. The banner is wide and shallow — the
+photograph runs to the left edge at about 54% of the width, the copy sits on a cream-to-sage
+wash, and the whole thing is roughly 430px tall rather than the 560px it was. That height is
+set by the photograph's own 1.6:1 crop, so nothing in the box is cut off. The closing band is
+a slim cream strip: branch at the left, copy centred, button at the right-hand end. The copy
+carries a 90px left padding so it reads as centred on the band rather than on the space the
+button leaves.
+
+The foliage in both is one `<symbol id="es-branch">` near the top of the page, placed with
+`<use>` and turned by the `.es-foliage-*` rules. Drawing it once keeps every sprig identical;
+changing the leaf shape in that one `<g id="es-leaf">` changes all of them. Stacked layouts
+drop the sprigs that would otherwise land over the photograph or the heading.
+
+Buttons are set in a system sans (`--es-sans`), not Lora — the cues show them that way.
 
 ### Rendering the canvas PDFs
 
