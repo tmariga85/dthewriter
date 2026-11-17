@@ -26,7 +26,10 @@ GitHub Pages serves static files only, so the WordPress theme's PHP mailer
 and the one in the pop-up modal — are handled by
 [`assets/js/mailto-contact.js`](assets/js/mailto-contact.js): on submit it
 validates the fields, composes a formatted message and opens the visitor's own
-email application addressed to **deemariga@gmail.com**.
+email application addressed to **deethewriter85@gmail.com**.
+
+The page also carries WhatsApp links to **+27 67 182 0542** (`https://wa.me/27671820542`)
+in the menu overlay, the contact modal and the footer icons.
 
 To change the recipient, edit `RECIPIENT` at the top of that file. With
 JavaScript disabled the forms fall back to a plain `mailto:` POST to the same

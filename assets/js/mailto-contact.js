@@ -6,7 +6,7 @@
 (function () {
 	'use strict';
 
-	var RECIPIENT = 'deemariga@gmail.com';
+	var RECIPIENT = 'deethewriter85@gmail.com';
 	var MAX_URL = 1900; // keep the mailto: link inside safe browser limits
 
 	// Field name -> label used in the email body. Order sets the body order.
@@ -22,6 +22,8 @@
 	var REQUIRED = ['name', 'email'];
 	var MESSAGE_FIELDS = ['message', 'textarea'];
 	var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+	// Values that are really just the unselected placeholder of a <select>.
+	var PLACEHOLDERS = ['Your budget'];
 
 	injectStyles();
 
@@ -85,6 +87,7 @@
 			var n = pair[0];
 			var label = pair[1];
 			if (!(n in values) || !values[n] || used[label]) return;
+			if (PLACEHOLDERS.indexOf(values[n]) !== -1) return;
 			used[label] = true;
 			if (label === 'Message') return; // message goes last, on its own
 			lines.push(label + ': ' + values[n]);
