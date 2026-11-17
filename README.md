@@ -1,6 +1,6 @@
 # dthewriter.co.za
 
-Static site for **D the Writer** — Daisy Maiga, South African freelance copywriter,
+Static site for **D the Writer** — Daisy Mariga, South African freelance copywriter,
 ghostwriter and publisher. Served by GitHub Pages at <https://www.dthewriter.co.za/>.
 
 Migrated from WordPress on Afrihost shared hosting. The original site was a
@@ -68,23 +68,51 @@ Mail (`MX`) and `SPF` records are untouched, so email keeps running on Afrihost.
 stylesheet at `assets/css/elevating-spaces.css`. It is linked from both menus on the landing
 page and listed in the sitemap.
 
-Photographs are not committed yet. Each slot falls back to a styled placeholder naming what
-belongs there; drop a file into `assets/images/elevating/` under the matching name and it
-replaces the placeholder with no markup change:
+Images live in `assets/images/elevating/`. The gift box photographs were resized from the
+originals in `D:\Website- Elevating Spaces\`; the four canvas artworks were rendered from the
+supplied PDFs (see below).
 
 | File | Used for |
 |---|---|
-| `hero-gift-box.jpg` | Hero photograph |
+| `hero-gift-box.jpg` | Hero photograph (right-hand crop of the main banner) |
 | `teacher-thoughtful.jpg` | The Thoughtful Gift |
 | `teacher-appreciation.jpg` | The Appreciation Gift |
 | `teacher-signature.jpg` | The Signature Gift |
 | `corporate-appreciation.jpg` | The Appreciation Box |
 | `corporate-signature.jpg` | The Signature Box |
-| `voice-we-are-seeds.jpg` | Canvas artwork |
 | `christmas-box.jpg` | Christmas Collection |
-| `home-living.jpg` | Styled living room |
-| `home-pantry.jpg` | Organised pantry |
+| `canvas-seeds.jpg` | We Are Seeds |
+| `canvas-pebbles.jpg` | Pebbles of Yesterday |
+| `canvas-gentle.jpg` | Let Our Hearts Be Gentle |
+| `canvas-dad.jpg` | Dad, You Are The Man |
+| `home-living.jpg` | Styled living room — **not supplied yet** |
+| `home-pantry.jpg` | Organised pantry — **not supplied yet** |
+
+A missing file falls back to a styled placeholder naming what belongs there, so the two
+outstanding interior shots can be dropped in later with no markup change.
+
+### Rendering the canvas PDFs
+
+The canvas artwork arrived as print PDFs. pdf.js in Node renders the photograph but not the
+embedded fonts, so the quotes were read from the PDF text layer and drawn back on at the
+recorded positions. The working scripts are not kept in this repository; the approach was:
+
+1. `pdfjs-dist` with a single canvas factory for both the page canvas and its scratch
+   canvases — mixing `canvas` and `@napi-rs/canvas` fails inside `endGroup` with
+   "Image or Canvas expected".
+2. `page.getTextContent()` for each line's string, baseline position, size and advance
+   width, and `getOperatorList()` for the fill colours (white quote, gold strapline).
+3. Each line drawn in Georgia italic with node-canvas, scaled horizontally to the exact
+   width the PDF recorded, so the line breaks and extents match the original.
+
+Two notes on the source files:
+
+- `Website Elevating Spaces- Dance Canvas.pdf` is 8MB of zero bytes and contains no PDF
+  data at all, so that canvas is not on the page.
+- The other four PDFs store their photographs as CMYK, two as `DCTDecode` and two as
+  `FlateDecode` with a PNG predictor. Converting those by hand gives the wrong colours;
+  letting pdf.js do the decoding is what gets them right.
 
 Every call to action opens a mail client addressed to deethewriter85@gmail.com with a subject
-and prefilled checklist for that collection. The footer carries Contact, Instagram (handle still
-to be supplied) and WhatsApp on +27 67 182 0542.
+and prefilled checklist for that collection. The footer carries Contact, Instagram (handle
+still to be supplied) and WhatsApp on +27 67 182 0542.

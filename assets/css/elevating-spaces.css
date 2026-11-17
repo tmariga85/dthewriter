@@ -209,7 +209,7 @@ body.es-page {
   transform: translateY(-4px); box-shadow: var(--es-shadow);
   border-color: var(--es-olive-soft);
 }
-.es-card .es-photo { border-radius: 0; aspect-ratio: 4 / 3; }
+.es-card .es-photo { border-radius: 0; aspect-ratio: 1 / 1; }
 .es-card-body { padding: 16px 18px 20px; text-align: center; background: var(--es-cream-2); }
 .es-card-title {
   font-family: var(--es-serif); font-size: 19px; color: var(--es-ink); margin: 0;
@@ -223,12 +223,42 @@ body.es-page {
 .es-split > :first-child { padding-right: 48px; border-right: 1px solid var(--es-rule); }
 .es-split > :last-child { padding-left: 48px; }
 
-.es-voice { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; }
-.es-voice .es-photo { aspect-ratio: 4 / 3.2; box-shadow: var(--es-shadow); }
-.es-voice p { margin: 0; font-size: 16px; color: var(--es-ink-soft); }
+/* ---------- the voice of inspiration ---------- */
+
+.es-voice-intro {
+  max-width: 44em; margin: 0 auto 34px; text-align: center;
+  font-size: 16px; color: var(--es-ink-soft);
+}
+
+/* Aligned to the bottom so the titles line up like a shelf, since the
+   canvases themselves are different heights. */
+.es-canvases {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px;
+  align-items: end;
+}
+.es-canvas { display: block; text-decoration: none; }
+/* The canvases are not all the same shape, so each keeps its own
+   proportions rather than being cropped into a common frame. */
+.es-canvas .es-photo {
+  box-shadow: var(--es-shadow);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.es-canvas .es-photo img { width: 100%; height: auto; object-fit: contain; }
+.es-canvas:hover .es-photo, .es-canvas:focus-visible .es-photo {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 26px 52px -24px rgba(67, 55, 42, .6);
+}
+.es-canvas .es-photo img { transition: transform .5s ease; }
+.es-canvas:hover .es-photo img { transform: scale(1.04); }
+.es-canvas-title {
+  margin: 14px 0 0; text-align: center;
+  font-family: var(--es-serif); font-style: italic;
+  font-size: 17px; color: var(--es-ink);
+}
+.es-canvas:hover .es-canvas-title { color: var(--es-olive); }
 
 .es-christmas { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: center; }
-.es-christmas .es-photo { aspect-ratio: 4 / 3; }
+.es-christmas .es-photo { aspect-ratio: 3 / 2; }
 .es-christmas-note { text-align: center; }
 .es-christmas-note .es-soon {
   font-family: var(--es-serif); font-style: italic; font-size: 26px;
@@ -294,6 +324,7 @@ body.es-page {
 /* ---------- responsive ---------- */
 
 @media (max-width: 1023px) {
+  .es-canvases { grid-template-columns: repeat(2, 1fr); }
   .es-hero { grid-template-columns: 1fr; }
   .es-hero-media { min-height: 300px; }
   .es-hero-body { padding: 48px 28px; }
@@ -313,7 +344,8 @@ body.es-page {
   .es-nav.is-open ul { flex-direction: column; align-items: flex-start; gap: 14px; }
   .es-nav-toggle { display: inline-block; }
   .es-cards-3, .es-cards-2 { grid-template-columns: 1fr; }
-  .es-voice, .es-christmas { grid-template-columns: 1fr; }
+  .es-canvases { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .es-christmas { grid-template-columns: 1fr; }
   .es-head h2 { gap: 14px; font-size: 26px; }
   .es-head h2::before, .es-head h2::after { max-width: 40px; }
   .es-footer-inner { flex-direction: column; text-align: center; }
