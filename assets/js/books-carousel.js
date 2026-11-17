@@ -42,10 +42,63 @@
 			imagesLoaded: true
 		});
 
+		// --- clicking a cover opens its Amazon page -------------------------
+		// Flickity treats any pointer movement over ~3px as a drag and swallows
+		// the click, which is most trackpad clicks and nearly every tap on a
+		// phone. So the press is handled here instead, with a looser threshold,
+		// and the carousel is held still while a finger is down on it.
+		var downLink = null, downX = 0, downY = 0;
+		var SLOP = 12; // px of wobble still counted as a click, not a drag
+
+		el.addEventListener('pointerdown', function (e) {
+			downLink = e.target.closest ? e.target.closest('a.lqd-book') : null;
+			downX = e.clientX;
+			downY = e.clientY;
+			if (downLink && flkty.player) flkty.stopPlayer();
+		});
+
+		el.addEventListener('pointerup', function (e) {
+			var link = downLink;
+			downLink = null;
+			if (!link || e.button !== 0) return;
+			if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+			var dx = e.clientX - downX;
+			var dy = e.clientY - downY;
+			if (Math.sqrt(dx * dx + dy * dy) > SLOP) return; // genuine drag
+			// some mobile browsers block window.open outside a click handler;
+			// fall back to the same tab rather than doing nothing
+			var opened = window.open(link.href, '_blank', 'noopener');
+			if (!opened) window.location.href = link.href;
+		});
+
+		el.addEventListener('pointercancel', function () { downLink = null; });
+
+		// pointerup already opened it; stop the browser following the href too
+		el.addEventListener('click', function (e) {
+			var link = e.target.closest ? e.target.closest('a.lqd-book') : null;
+			if (!link) return;
+			if (e.detail === 0) return; // keyboard Enter — let the browser do it
+			if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+			e.preventDefault();
+		});
+
 		if (reduced) {
 			markReady(el);
 			return;
 		}
+
+		// --- keep it turning ------------------------------------------------
+		// Flickity stops autoplay for good the first time anyone touches the
+		// carousel. Nudge it back into motion once the pointer has left.
+		var hovering = false;
+		el.addEventListener('mouseenter', function () { hovering = true; });
+		el.addEventListener('mouseleave', function () { hovering = false; });
+		setInterval(function () {
+			if (hovering || document.hidden) return;
+			if (flkty.player && flkty.player.state !== 'playing') {
+				flkty.playPlayer();
+			}
+		}, 2500);
 
 		var slides = el.querySelectorAll('.lqd-book-slide-inner');
 
