@@ -1,0 +1,247 @@
+/*!
+ * books.css — "Books by Daisy Mariga" carousel
+ * Sits on top of the theme; uses the theme's own type scale and accent colour.
+ */
+
+.lqd-books {
+	padding: 120px 0 100px;
+	overflow: hidden;
+}
+
+/* ---------- section heading ---------- */
+.lqd-books-head {
+	max-width: 660px;
+	margin: 0 auto 70px;
+	text-align: center;
+}
+
+.lqd-books-head .lqd-books-eyebrow {
+	display: inline-block;
+	margin-bottom: 18px;
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: rgba(0, 0, 0, 0.35);
+}
+
+.lqd-books-head h2 {
+	margin: 0 0 20px;
+	font-size: 46px;
+	line-height: 1.05em;
+	letter-spacing: -0.8px;
+}
+
+.lqd-books-head h2 em {
+	font-family: var(--lqd-accent-font-family);
+	font-weight: 400;
+	font-style: italic;
+	letter-spacing: 0;
+}
+
+.lqd-books-head p {
+	margin: 0;
+	font-size: 16px;
+	line-height: 1.65em;
+	color: rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- carousel ---------- */
+.lqd-books-carousel {
+	perspective: 1600px;
+	perspective-origin: 50% 45%;
+	padding-bottom: 20px;
+}
+
+.lqd-books-carousel:focus {
+	outline: 0;
+}
+
+.lqd-book-slide {
+	width: 320px;
+	margin: 0 30px;
+	transform-style: preserve-3d;
+}
+
+.lqd-book-slide-inner {
+	transform-origin: 50% 50%;
+	will-change: transform, opacity;
+}
+
+/* the whole card is the link */
+.lqd-book {
+	display: block;
+	text-decoration: none;
+	color: inherit;
+}
+
+.lqd-book-cover {
+	/* fixed height + bottom alignment: covers of different proportions all
+	   stand on one line, like books on a shelf */
+	height: 430px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	margin: 0 0 26px;
+}
+
+.lqd-book-cover-inner {
+	position: relative;
+	display: inline-block;
+	max-width: 100%;
+	max-height: 100%;
+	border-radius: 5px;
+	overflow: hidden;
+	box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.55);
+	transition: box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+		transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lqd-book-cover img {
+	display: block;
+	width: auto;
+	max-width: 100%;
+	height: 430px;
+	max-height: 430px;
+	object-fit: contain;
+}
+
+/* a soft sheen that sweeps across on hover */
+.lqd-book-cover-inner::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(105deg, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0.45) 50%, rgba(255, 255, 255, 0) 65%);
+	transform: translateX(-120%);
+	transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+	pointer-events: none;
+}
+
+.lqd-book:hover .lqd-book-cover-inner,
+.lqd-book:focus-visible .lqd-book-cover-inner {
+	transform: translateY(-10px);
+	box-shadow: 0 34px 60px -26px rgba(0, 0, 0, 0.6);
+}
+
+.lqd-book:hover .lqd-book-cover-inner::after {
+	transform: translateX(120%);
+}
+
+.lqd-book-title {
+	margin: 0 0 8px;
+	font-size: 20px;
+	line-height: 1.25em;
+	letter-spacing: -0.2px;
+}
+
+.lqd-book-sub {
+	margin: 0 0 16px;
+	font-size: 13px;
+	line-height: 1.5em;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.lqd-book-cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 9px;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: #000;
+}
+
+.lqd-book-cta span {
+	position: relative;
+	padding-bottom: 3px;
+}
+
+.lqd-book-cta span::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 1px;
+	background: currentColor;
+	transform: scaleX(0);
+	transform-origin: left center;
+	transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lqd-book:hover .lqd-book-cta span::after,
+.lqd-book:focus-visible .lqd-book-cta span::after {
+	transform: scaleX(1);
+}
+
+.lqd-book-cta i {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 26px;
+	height: 26px;
+	border-radius: 50%;
+	background: var(--lqd-color-accent);
+	transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lqd-book-cta svg {
+	width: 9px;
+	height: 9px;
+	fill: currentColor;
+}
+
+.lqd-book:hover .lqd-book-cta i {
+	transform: translate(3px, -3px);
+}
+
+/* the centred slide gets the full treatment; the rest sit back */
+.lqd-book-slide .lqd-book-meta {
+	opacity: 0;
+	transform: translateY(14px);
+	transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lqd-book-slide.is-selected .lqd-book-meta {
+	opacity: 1;
+	transform: none;
+}
+
+/* ---------- entrance ---------- */
+.lqd-books-animate .lqd-books-head,
+.lqd-books-animate .lqd-books-carousel-wrap {
+	opacity: 0;
+	transform: translateY(40px);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1199px) {
+	.lqd-book-slide { width: 280px; margin: 0 22px; }
+	.lqd-book-cover { height: 380px; }
+	.lqd-book-cover img { height: 380px; max-height: 380px; }
+	.lqd-books-head h2 { font-size: 40px; }
+}
+
+@media (max-width: 767px) {
+	.lqd-books { padding: 80px 0 70px; }
+	.lqd-books-head { margin-bottom: 45px; }
+	.lqd-books-head h2 { font-size: 30px; }
+	.lqd-book-slide { width: 72vw; margin: 0 14px; }
+	.lqd-book-cover { height: 300px; }
+	.lqd-book-cover img { height: 300px; max-height: 300px; }
+	.lqd-books-carousel { perspective: none; }
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+	.lqd-books-carousel { perspective: none; }
+	.lqd-book-slide-inner { transform: none !important; opacity: 1 !important; }
+	.lqd-book-slide .lqd-book-meta { opacity: 1; transform: none; }
+	.lqd-book-cover-inner,
+	.lqd-book-cover-inner::after,
+	.lqd-book-cta i,
+	.lqd-book-cta span::after { transition: none; }
+	.lqd-books-animate .lqd-books-head,
+	.lqd-books-animate .lqd-books-carousel-wrap { opacity: 1; transform: none; }
+}

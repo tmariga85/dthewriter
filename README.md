@@ -35,6 +35,17 @@ To change the recipient, edit `RECIPIENT` at the top of that file. With
 JavaScript disabled the forms fall back to a plain `mailto:` POST to the same
 address.
 
+## Books carousel
+
+The `#books` section replaced the theme's interior-design demo section. Covers live
+in `assets/images/books/`, the markup is five `.lqd-book-slide` blocks in
+`index.html`, and the behaviour is [`assets/js/books-carousel.js`](assets/js/books-carousel.js)
+(Flickity, already bundled with the theme, plus a coverflow tilt) styled by
+[`assets/css/books.css`](assets/css/books.css).
+
+To add a book: drop the cover in `assets/images/books/`, copy a slide block and
+change the image, title, subtitle and the `https://www.amazon.com/dp/<ASIN>` link.
+
 ## Editing
 
 It's one HTML file — edit `index.html` and push. GitHub Pages redeploys on every
