@@ -130,6 +130,10 @@ Two notes on the source files:
   `FlateDecode` with a PNG predictor. Converting those by hand gives the wrong colours;
   letting pdf.js do the decoding is what gets them right.
 
+A floating WhatsApp button sits in the bottom-right corner on every scroll position, linking
+to https://wa.me/27671820542 with an opening message. On a pointer device it reveals a "Chat
+with us" label on hover; on touch the label is hidden, since there is no hover there.
+
 Every call to action opens a mail client addressed to deethewriter85@gmail.com with a subject
 and prefilled checklist for that collection. The footer carries Contact, Instagram (handle
 still to be supplied) and WhatsApp on +27 67 182 0542.
