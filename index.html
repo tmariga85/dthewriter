@@ -290,9 +290,6 @@ Which service can I offer you today?</h2>
                         <figure class="absolute overflow-hidden">
                             <img class="w-full h-full lqd-overlay flex objfit-cover objfit-center" src="./assets/images/banner-hero-4.jpg" alt="banner">
                         </figure>
-                        <figure class="absolute overflow-hidden">
-                            <img class="w-full h-full lqd-overlay flex objfit-cover objfit-center" src="./assets/images/banner-hero-2.jpg" alt="banner">
-                        </figure>
                     </div>
                     <div class="lqd-vslider-menu lqd-overlay flex z-1">
                         <ul class="reset-ul flex flex-col lqd-overlay flex text-vertical">
@@ -309,11 +306,6 @@ Which service can I offer you today?</h2>
                             <li class="flex items-end p-1/5rem m-0 relative">
                                 <a class="lqd-webgl-slideshow-link p-1/5rem" href="#">
                                     <span class="inline-flex">Copywriting</span>
-                                </a>
-                            </li>
-                            <li class="flex items-end p-1/5rem m-0 relative">
-                                <a class="lqd-webgl-slideshow-link p-1/5rem" href="#">
-                                    <span class="inline-flex">Interior Design</span>
                                 </a>
                             </li>
                         </ul>
@@ -937,7 +929,7 @@ Which service can I offer you today?</h2>
                     <a href="#contact-modal" class="button btn text-14 font-bold uppercase leading-1em tracking-1 text-black border-2 rounded-100 btn py-0/6em px-1em mr-10 hover:bg-black hover:text-white" data-lity="#contact-modal">
                         <span class="btn-txt" data-text="Send a message">Send a message</span>
                     </a>
-                    <a href="#" class="text-14 font-bold uppercase leading-1em tracking-1 text-black rounded-100 btn btn-solid btn-custom-size btn-icon-block btn-icon-top w-35 h-35 bg-accent mr-10 border-none p-0 w-35 h-35 " target="_blank" rel="nofollow">
+                    <a href="#contact-modal" class="text-14 font-bold uppercase leading-1em tracking-1 text-black rounded-100 btn btn-solid btn-custom-size btn-icon-block btn-icon-top w-35 h-35 bg-accent mr-10 border-none p-0 w-35 h-35 "data-lity="#contact-modal" aria-label="Send a message">
                         <span class="btn-icon w-1em">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10.625" height="10.625" viewBox="0 0 10.625 10.625">
                                 <path d="M-1.76-11.322H5.313V-4.25H3.885V-8.932L-4.316-.7l-1-1,8.2-8.234H-1.76Z" transform="translate(5.313 11.322)"></path>
@@ -1016,7 +1008,7 @@ Which service can I offer you today?</h2>
 							</div>
 							<div class="col col-12 col-md-4 text-center sm:text-start module-col">
 								<div class="ld-fancy-heading relative">
-									<p class="ld-fh-element mb-0/5em inline-block relative text-14 text-white-50">© 2024 Dwriter.</p>
+									<p class="ld-fh-element mb-0/5em inline-block relative text-14 text-white-50">© <span id="lqd-year">2026</span> Distinctive Creatives.</p>
 								</div>
 							</div>
 							<div class="col col-12 col-md-4 text-end sm:text-start">
@@ -1050,7 +1042,7 @@ Which service can I offer you today?</h2>
 		<div id="contact-modal" class="lity-modal lqd-modal lity-hide" data-modal-type="fullscreen">
 			<div class="lqd-modal-inner">
 				<div class="lqd-modal-head"></div>
-				<section class="lqd-modal-content link-black bg-center bg-cover bg-norepeat" style="background-image: url(./assets/images/common/modal-bg.jpeg);">
+				<section class="lqd-modal-content link-black bg-center bg-cover bg-norepeat">
 					<div class="container min-h-100vh flex items-center flex-wrap">
 						<div class="w-55percent relative flex flex-col sm:w-full">
 							<div class="flex flex-col items-start justify-center py-10 pr-100 pl-10 module-content">
@@ -1224,6 +1216,8 @@ Which service can I offer you today?</h2>
 				<button class="lity-close" type="button" aria-label="Close (Press escape to close)" data-lity-close>&times;</button>
 			</div>
 		</div>
+
+		<script>(function(){var y=document.getElementById("lqd-year");if(y){y.textContent=new Date().getFullYear();}})();</script>
 
 		<script src="./assets/js/mailto-contact.js"></script>
 
