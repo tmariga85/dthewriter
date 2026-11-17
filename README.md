@@ -1,7 +1,7 @@
 # dthewriter.co.za
 
 Static site for **D the Writer** — Daisy Maiga, South African freelance copywriter,
-ghostwriter and publisher. Served by GitHub Pages at <https://www.dthewriter.co.za/>.
+ghostwriter and publisher. Served by GitHub Pages at <https://dthewriter.co.za/>.
 
 Migrated from WordPress on Afrihost shared hosting. The original site was a
 single-page WordPress install with a bespoke theme (`d-2023`), no plugins and no
@@ -58,6 +58,6 @@ Domain and email stay with Afrihost. Only the web records point here:
 | Record | Host | Value |
 | --- | --- | --- |
 | A | `@` | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` |
-| CNAME | `www` | `tmariga85.github.io` |
+| CNAME | `www` | `tmariga85.github.io` (redirects to the bare domain) |
 
 Mail (`MX`) and `SPF` records are untouched, so email keeps running on Afrihost.
