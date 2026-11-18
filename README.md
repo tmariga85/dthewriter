@@ -56,6 +56,14 @@ follows it natively. Flickity counts any movement over 3px as a drag and swallow
 click, which is most trackpad clicks and nearly every tap on a phone, so the carousel is
 initialised with `dragThreshold: 10` to give a press room to wobble.
 
+The tilt is a 3D transform, and on a tilted cover the hit area and the painted image do
+not line up: a press on what looked like the middle of a side book landed on the slide
+**behind** the link, so only the centred book opened. The carousel therefore listens for
+clicks that reach a slide without having touched its link and hands them to that slide.s
+own cover with `link.click()`, guarded so a drag never counts. Test this with a real
+click, not a synthesised one — and freeze the autoplay first, or the cells move between
+measuring and clicking and the result is meaningless.
+
 An earlier version intercepted the press and called `window.open` instead. That was worse
 in two ways, and both are easy to repeat: **`window.open(url, "_blank", "noopener")`
 returns `null` even when it succeeds**, so the popup-blocked fallback behind it fired every

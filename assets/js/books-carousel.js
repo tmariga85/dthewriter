@@ -56,10 +56,36 @@
 		// stop a plain link. Letting the anchor be an anchor also restores
 		// middle-click, ctrl-click and "copy link address".
 
-		// Hold the carousel still while a finger or cursor is down on a cover.
+		// Hold the carousel still while a finger or cursor is down on a cover,
+		// and remember where the press started so a drag can be told from a tap.
+		// null, not 0: if no pointerdown was seen the guard below must stand
+		// aside rather than treat the press as a drag across half the screen.
+		var downX = null, downY = null;
 		el.addEventListener('pointerdown', function (e) {
+			downX = e.clientX; downY = e.clientY;
 			var link = e.target.closest ? e.target.closest('a.lqd-book') : null;
 			if (link && flkty.player) flkty.stopPlayer();
+		});
+
+		// The coverflow tilt is a 3D transform, and on a tilted cover the hit
+		// area and the painted image do not line up: a press on what looks
+		// like the middle of a side book lands on the slide behind the link,
+		// so only the centred book was opening. When a click reaches a slide
+		// without having touched its link, hand it to that slide's own cover.
+		el.addEventListener('click', function (e) {
+			if (e.defaultPrevented) return;                 // Flickity: it was a drag
+			if (e.button !== 0 || e.detail === 0) return;
+			if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+			if (!e.target.closest) return;
+			if (e.target.closest('a.lqd-book')) return;     // the link already has it
+			var slide = e.target.closest('.lqd-book-slide');
+			var link = slide && slide.querySelector('a.lqd-book');
+			if (!link) return;
+			// Belt and braces: ignore anything that moved like a drag.
+			if (downX !== null &&
+				(Math.abs(e.clientX - downX) > 10 || Math.abs(e.clientY - downY) > 10)) return;
+			downX = downY = null;
+			link.click();   // a real click on the anchor, so the browser follows it
 		});
 
 		if (reduced) {
