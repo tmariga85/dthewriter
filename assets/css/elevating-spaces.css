@@ -102,6 +102,10 @@ body.es-page {
   font-family: var(--es-body); font-size: 14px; color: var(--es-ink);
 }
 
+/* The one link sitting inside a line of footer text. Inline-block with a
+   little padding clears the 24px minimum without disturbing the line. */
+.es-footer-legal a { display: inline-block; padding: 4px 2px; }
+
 /* ---------- back to the main site ---------- */
 
 /* A slim strip above the header proper, inside the same sticky block. */
@@ -251,7 +255,7 @@ body.es-page {
   position: absolute; z-index: 4; left: 0; right: 0;
   bottom: clamp(10px, 1.5vw, 26px);
   display: flex; justify-content: center; align-items: center;
-  gap: clamp(7px, .8vw, 13px);
+  gap: clamp(16px, 1.4vw, 22px);
 }
 .es-hero-dot, .es-hero-play {
   padding: 0; cursor: pointer; border-radius: 50%;
@@ -260,14 +264,23 @@ body.es-page {
   box-shadow: 0 2px 8px -3px rgba(40, 34, 20, .45);
   transition: background .25s ease, transform .25s ease, border-color .25s ease;
 }
-.es-hero-dot { width: 11px; height: 11px; }
+.es-hero-dot { position: relative; width: 11px; height: 11px; }
+.es-hero-dot::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 44px; height: 44px; transform: translate(-50%, -50%);
+}
 .es-hero-dot:hover { border-color: var(--es-cta); }
 .es-hero-dot.is-on {
   background: var(--es-cta); border-color: var(--es-cta); transform: scale(1.2);
 }
 .es-hero-play {
+  position: relative;
   width: 25px; height: 25px; margin-left: 5px;
   display: grid; place-items: center; color: var(--es-cta);
+}
+.es-hero-play::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 44px; height: 44px; transform: translate(-50%, -50%);
 }
 .es-hero-play svg { width: 11px; height: 11px; display: block; }
 .es-hero-dot:focus-visible, .es-hero-play:focus-visible {
@@ -433,14 +446,20 @@ body.es-page {
 
 /* Dots */
 .es-car-dots {
-  display: flex; justify-content: center; gap: 10px;
+  display: flex; justify-content: center; gap: 22px;
   margin-top: 18px;
 }
 .es-car-dot {
+  position: relative;
   width: 9px; height: 9px; padding: 0;
   border: 1px solid var(--es-olive-soft); border-radius: 50%;
   background: transparent; cursor: pointer;
   transition: background .25s ease, transform .25s ease, border-color .25s ease;
+}
+/* A 44px target around a 9px dot: the pad is invisible and takes the tap. */
+.es-car-dot::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 44px; height: 44px; transform: translate(-50%, -50%);
 }
 .es-car-dot.is-on {
   background: var(--es-olive); border-color: var(--es-olive);
@@ -648,6 +667,27 @@ body.es-page {
   .es-brand-tag { font-size: 11px; margin-top: 3px; }
   .es-nav-toggle { padding: 7px 10px; font-size: 13px; }
   .es-wrap { padding: 0 16px; }
+}
+
+/* Landscape phones and anything else short and wide: the stacked banner
+   takes a thinner slice so the heading and the call to action are both on
+   screen without scrolling. */
+@media (max-width: 1023px) and (max-height: 520px) and (orientation: landscape) {
+  .es-hero-art { aspect-ratio: 21 / 9; max-height: 38vh; }
+  .es-hero-body,
+  .es-copy-right, .es-copy-left, .es-copy-wide { padding: 18px 22px 44px; }
+  .es-hero h1, .es-hero h2 { font-size: clamp(22px, 4.4vw, 32px); }
+  .es-slide-3 h2 { font-size: clamp(21px, 4.1vw, 30px); }
+  .es-hero-rule,
+  .es-slide-2 .es-hero-rule,
+  .es-slide-3 .es-hero-rule { margin: 9px auto; }
+  .es-hero p { font-size: 14px; margin-bottom: 14px; }
+  .es-hero .es-btn { padding: 10px 20px; }
+  .es-hero-feats { margin-bottom: 12px; }
+  .es-hero-feats svg { width: 22px; }
+  .es-hero-nav { bottom: 10px; }
+  /* No room for a snow shelf on a screen this short. */
+  .es-snowzone { padding-bottom: 96px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -151,6 +151,20 @@ before stays in the alt text.
 The old `home-living.jpg` and `home-pantry.jpg` were low-resolution crops from a composite
 mock-up. They are superseded and nothing links to them.
 
+### Across form factors
+
+Checked at 320, 360, 390, 430, 768, 844x390 landscape, 1024, 1440, 1920 and 2560. Nothing
+overflows sideways at any of them. Two things came out of that sweep:
+
+- **The carousel dots were 9-13px.** They are meant to look small, so rather than growing
+  them each one carries an invisible 44px pad through an `::after`, and the gaps between
+  them were widened so the pads do not overlap and steal each other.s taps. The footer
+  link inside the copyright line is inline-block with a little padding, which clears the
+  24px minimum without disturbing the line it sits in.
+- **Landscape phones** got their own rule (`max-height: 520px` and `orientation: landscape`):
+  a 21:9 slice of banner instead of 16:10, tighter type and padding, and a shorter snow
+  shelf, so the heading and the call to action are both on screen without scrolling.
+
 ### Snow on the Christmas Collection
 
 Hover the Christmas block and snow starts falling, settles into a drift along the floor, and
