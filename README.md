@@ -17,6 +17,7 @@ assets/js/                     theme scripts + mailto-contact.js
 assets/images/                 photography, book cover, logos
 assets/vendors/                GSAP, Flickity, Isotope, jQuery, Bootstrap, etc.
 tools/banner/                  the three supplied banner artworks + the script that clears their text
+tools/before-after/            the supplied before/after artwork + the script that splits it
 CNAME                          custom domain for GitHub Pages
 ```
 
@@ -99,8 +100,9 @@ supplied PDFs (see below).
 | `canvas-pebbles.jpg` | Pebbles of Yesterday |
 | `canvas-gentle.jpg` | Let Our Hearts Be Gentle |
 | `canvas-dad.jpg` | Dad, You Are The Man |
-| `home-living.jpg` | Styled living room &mdash; low resolution, see below |
-| `home-pantry.jpg` | Organised pantry &mdash; low resolution, see below |
+| `home-living-before.jpg` `home-living-after.jpg` | The living room either side of a styling job; the tiles dissolve between them |
+| `home-pantry-before.jpg` `home-pantry-after.jpg` | The pantry either side of an organising job; same treatment |
+| `home-living.jpg` `home-pantry.jpg` | Superseded by the pairs above; nothing links to them |
 
 A missing file falls back to a styled placeholder naming what belongs there, so further
 photography can be dropped in later with no markup change.
@@ -108,10 +110,47 @@ photography can be dropped in later with no markup change.
 The home services section sits beside the Christmas Collection in a two-column row, with two
 interior photographs above its copy.
 
-**Those two photographs are low resolution.** They were cropped out of a composite mock-up of
-the section rather than supplied as files, so each is about 210x132 native, upscaled to 460px
-wide. They hold up at the size they display but will look soft on a high-density screen.
-Replace `home-living.jpg` and `home-pantry.jpg` with the originals when they are available.
+**Each tile holds the same room twice and dissolves one state into the other**, so the work
+shows itself rather than being described. The supplied artwork arrived as two 2000&times;667
+sheets, each holding a living-room panel and a pantry panel side by side;
+[`tools/before-after/split-pairs.mjs`](tools/before-after/split-pairs.mjs) cuts them into the
+four tiles and trims both to a common 3:2 so the two states line up as they fade. The
+BEFORE and AFTER labels are part of the artwork, which saves the page drawing its own.
+
+The fade is CSS alone &mdash; both frames are stacked in the box and only the top one animates,
+so there is nothing to keep in step. The two tiles are offset by half a cycle so they are
+never mid-fade together, and hovering or tabbing into a tile holds the after, so the result
+can be studied. Under `prefers-reduced-motion` there is no fade: the after is shown and the
+before stays in the alt text.
+
+The old `home-living.jpg` and `home-pantry.jpg` were low-resolution crops from a composite
+mock-up. They are superseded and nothing links to them.
+
+### Snow on the Christmas Collection
+
+Hover the Christmas block and snow starts falling, settles into a drift along the floor, and
+once enough has landed a snowman builds himself out of it; leave and the whole thing fades
+and resets, so it plays again next time. On a touch screen there is no hover, so it runs
+while the block is on show instead. It is in
+[`assets/js/christmas-snow.js`](assets/js/christmas-snow.js), on a canvas, hand-rolled.
+
+Three things in there are worth knowing before changing it:
+
+- **The drift grows on a clock, not flake by flake.** Settling each flake individually is the
+  obvious way to write it and it looks right in theory, but at a believable snowfall the
+  floor takes the better part of a minute to show, and nobody hovers a section that long.
+  The drift fills to its cap in five seconds; flakes still nudge their own landing spot, so
+  where the snow falls still shows in the surface.
+- **Everything is sized from the clear space under the copy**, measured as the gap between
+  the call to action and the bottom of the block. The drift caps at 46% of it and the
+  snowman is scaled to 92% of it, so neither ever covers the text, and he is skipped
+  altogether if a layout leaves him nowhere to stand. Stacked layouts have no spare height,
+  so the block takes a 140px bottom padding there to give the snow a shelf of its own.
+- **The canvas takes no pointer events and the call to action sits above it**, so nothing in
+  the section stops being clickable while it is snowing.
+
+It does not run at all for a visitor who asks for reduced motion, and it stops when the tab
+is hidden.
 
 The four canvases run as a carousel ([`assets/js/canvas-carousel.js`](assets/js/canvas-carousel.js)):
 the centred canvas is scaled up while its neighbours shrink, tilt away and fade. It is

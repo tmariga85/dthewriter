@@ -365,7 +365,12 @@
   <section class="es-section" style="padding: 0;" id="christmas-collection">
     <div class="es-wrap es-split">
 
-      <div id="christmas">
+      <!-- Hover this block and snow falls, settles into a drift and builds a
+           snowman out of it. The canvas takes no pointer events and the call
+           to action sits above it, so nothing here stops being clickable. -->
+      <div id="christmas" class="es-snowzone">
+        <canvas class="es-snow" aria-hidden="true"></canvas>
+
         <div class="es-head es-reveal">
           <h2>Christmas Collection</h2>
         </div>
@@ -391,12 +396,22 @@
           <p>Decluttering, Home Organisation &amp; Home Improvement</p>
         </div>
 
+        <!-- Each tile holds the same room twice and dissolves one state into
+             the other. The supplied artwork carries its own BEFORE / AFTER
+             label, so the fade says which is which without extra chrome.
+             Hovering or tabbing to a tile holds the after. -->
         <div class="es-home-grid es-reveal">
-          <figure class="es-photo" data-slot="Styled living room">
-            <img src="assets/images/elevating/home-living.jpg" alt="A styled living room with a linen corner sofa, olive cushions, potted plants and a warm table lamp.">
+          <figure class="es-photo es-ba" data-slot="Living room, before and after">
+            <img class="es-ba-shot" src="assets/images/elevating/home-living-before.jpg"
+                 alt="Before: a bare linen corner sofa against an empty wall, with a stack of magazines on the coffee table.">
+            <img class="es-ba-shot es-ba-after" src="assets/images/elevating/home-living-after.jpg"
+                 alt="After: the same room styled with olive and green cushions, a vase of greenery, potted plants and a warm table lamp.">
           </figure>
-          <figure class="es-photo" data-slot="Organised pantry shelving">
-            <img src="assets/images/elevating/home-pantry.jpg" alt="Organised pantry shelving with labelled glass jars and woven storage baskets.">
+          <figure class="es-photo es-ba" data-slot="Pantry, before and after">
+            <img class="es-ba-shot" src="assets/images/elevating/home-pantry-before.jpg"
+                 alt="Before: pantry shelves crowded with mismatched tubs, open packets and a paper bag.">
+            <img class="es-ba-shot es-ba-after" src="assets/images/elevating/home-pantry-after.jpg"
+                 alt="After: the same shelves holding matching labelled glass jars, woven baskets and a potted plant on the sill.">
           </figure>
         </div>
 
@@ -671,5 +686,6 @@
 })();
 </script>
 
+<script src="assets/js/christmas-snow.js" defer></script>
 </body>
 </html>

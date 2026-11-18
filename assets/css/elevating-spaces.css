@@ -447,6 +447,32 @@ body.es-page {
 .es-christmas-note p { font-family: var(--es-serif); font-style: italic; color: var(--es-ink-soft); margin: 0; }
 
 .es-home-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* Before and after of the same room, dissolving one into the other. Both
+   frames are stacked in the same box and only the top one animates, so there
+   is nothing to keep in step. The two tiles are offset in time so they are
+   never mid-fade together. */
+.es-ba .es-ba-shot { position: absolute; inset: 0; }
+.es-ba-after { animation: es-ba-dissolve 11s ease-in-out infinite; }
+.es-home-grid > :last-child .es-ba-after { animation-delay: -5.5s; }
+@keyframes es-ba-dissolve {
+  0%, 9%    { opacity: 0; }
+  41%, 59%  { opacity: 1; }
+  91%, 100% { opacity: 0; }
+}
+/* Hovering or tabbing in holds the after, so the result can be studied. */
+.es-ba:hover .es-ba-after,
+.es-ba:focus-within .es-ba-after { animation: none; opacity: 1; }
+
+/* ---------- snow over the Christmas block ---------- */
+
+.es-snowzone { position: relative; }
+.es-snow {
+  position: absolute; inset: 0; z-index: 3;
+  display: block; pointer-events: none;
+}
+/* The call to action stays above the weather. */
+.es-snowzone .es-btn-row { position: relative; z-index: 4; }
 .es-home-grid .es-photo { aspect-ratio: 3 / 2; box-shadow: 0 12px 28px -20px rgba(67, 55, 42, .6); }
 .es-home-copy { margin: 20px 0 0; text-align: center; font-size: 15px; color: var(--es-ink-soft); }
 
@@ -524,6 +550,9 @@ body.es-page {
   .es-copy-wide  { left: 3%;  right: 52%; }
   .es-split { grid-template-columns: 1fr; }
   .es-split > :first-child { padding-right: 0; border-right: 0; border-bottom: 1px solid var(--es-rule); }
+  /* Stacked, the Christmas block has no spare height, so the snow is given a
+     shelf of its own to settle on rather than landing over the copy. */
+  .es-snowzone { padding-bottom: 140px; }
   .es-split > :last-child { padding-left: 0; }
   .es-band { padding: 34px 0; }
   .es-band-inner { flex-direction: column; text-align: center; gap: 22px; }
@@ -600,6 +629,8 @@ body.es-page {
   html { scroll-behavior: auto; }
   .es-reveal, .es-reveal.is-in { opacity: 1; transform: none; transition: none; }
   .es-card, .es-btn, .es-slide { transition: none; }
+  /* No dissolve; the after is shown and the before stays in the alt text. */
+  .es-ba-after { animation: none; opacity: 1; }
   .es-card:hover, .es-btn:hover { transform: none; }
   .es-car-track, .es-canvas { transition: none; }
 }
