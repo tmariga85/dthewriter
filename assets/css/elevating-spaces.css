@@ -9,6 +9,9 @@
   --es-olive-dark: #46522c;
   --es-olive-soft: #8a9767;
   --es-gold:       #be9a4c;
+  /* The call-to-action green, read off the button in the banner artwork. */
+  --es-cta:        #3a5009;
+  --es-cta-dark:   #2a3b05;
   --es-ink:        #43372a;
   --es-ink-soft:   #6e6052;
   --es-rule:       #ded4bd;
@@ -58,7 +61,9 @@ body.es-page {
   gap: 24px; padding: 14px 0; position: relative;
 }
 .es-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.es-brand svg { flex: none; width: 34px; height: 44px; color: var(--es-olive); }
+/* The mark is the house-and-branch logo, so it is landscape, not portrait.
+   currentColor draws the roof; the leaves read the two green variables. */
+.es-brand svg { flex: none; width: 60px; height: 35px; color: #452409; }
 .es-brand-name {
   display: block;
   font-family: var(--es-serif);
@@ -99,9 +104,9 @@ body.es-page {
 
 /* ---------- buttons ---------- */
 
-.es-btn {
+.es-btn, a.es-btn {
   display: inline-flex; align-items: center; gap: 10px;
-  background: var(--es-olive); color: #fff; text-decoration: none;
+  background: var(--es-cta); color: #fff; text-decoration: none;
   font-family: var(--es-sans); font-size: 13.5px; font-weight: 600;
   letter-spacing: .07em; text-transform: uppercase;
   padding: 13px 26px; border-radius: 3px;
@@ -109,7 +114,7 @@ body.es-page {
   box-shadow: 0 10px 24px -16px rgba(70, 82, 44, .9);
 }
 .es-btn:hover, .es-btn:focus-visible {
-  background: var(--es-olive-dark); transform: translateY(-2px);
+  background: var(--es-cta-dark); transform: translateY(-2px);
   box-shadow: 0 16px 30px -16px rgba(70, 82, 44, .9);
 }
 .es-btn::after { content: "\203A"; font-size: 18px; line-height: 1; }
@@ -118,35 +123,134 @@ body.es-page {
 
 /* ---------- hero ---------- */
 
-/* A wide, shallow banner: the photograph runs to the left edge and the
-   copy sits on a cream-to-sage wash, as in the supplied design cue. */
+/* Three supplied artworks at their own 2:1 proportion, stacked in a single
+   grid cell and cross-faded. Each slide carries its copy over whichever side
+   its own picture left clear, sized in vw so the type keeps pace with the
+   artwork instead of drifting out of proportion as the window changes. */
 .es-hero {
-  display: grid; grid-template-columns: 1.08fr .92fr;
-  align-items: stretch;
-  background: linear-gradient(100deg, #f2eee2 0%, #ece9d9 50%, #dbe1c8 100%);
+  display: grid;
   position: relative; overflow: hidden;
+  background: linear-gradient(165deg, #f7f0de 0%, #ece6cc 55%, #e0dbbd 100%);
 }
-.es-hero-media { min-height: 300px; }
-.es-hero-media .es-photo { height: 100%; border-radius: 0; }
+.es-slide {
+  grid-area: 1 / 1;          /* one cell for all three, so nothing jumps */
+  display: flex; flex-direction: column;
+  position: relative;
+  opacity: 0; visibility: hidden;
+  transition: opacity .9s ease, visibility 0s linear .9s;
+}
+.es-slide.is-active {
+  opacity: 1; visibility: visible;
+  transition: opacity .9s ease, visibility 0s;
+}
+.es-hero-art {
+  display: block; width: 100%; height: auto;
+  aspect-ratio: 1774 / 887;
+  max-height: 78vh;            /* a tall window must not give a tall banner */
+  object-fit: cover; object-position: center;
+}
 .es-hero-body {
+  position: absolute; z-index: 2; top: 0; bottom: 0;
   display: flex; flex-direction: column; justify-content: center;
-  padding: 40px 48px; text-align: center; position: relative; z-index: 2;
+  text-align: center;
 }
-.es-hero h1 {
+/* The padding nudges each block on to the line the artwork drew it on. */
+.es-copy-right { left: 56%;  right: 2.5%;  padding-bottom: 2.5%; }
+.es-copy-left  { left: 2.2%; right: 62%; padding-bottom: 2.4%; }
+.es-copy-wide  { left: 4.5%; right: 56%;   padding-top: 3.2%; }
+
+.es-hero h1, .es-hero h2 {
   font-family: var(--es-serif); font-weight: 400;
-  font-size: clamp(30px, 3.5vw, 46px); line-height: 1.16;
-  color: #4a3a28; margin: 0;
+  font-size: clamp(21px, 4.68vw, 74px); line-height: 1.05;
+  color: #5a3b1c; margin: 0;
 }
+/* Banners 2 and 3 set their first line brown and their second green. */
+.es-slide-2 h2, .es-slide-3 h2 { color: #6b3e11; }
+/* Playfair sets wider than the face in the artwork, so banner 2 comes down
+   a touch to keep "Meaningful spaces." on one line clear of the gift box. */
+.es-slide-2 h2 { font-size: clamp(19px, 4.02vw, 63px); }
+.es-h-green { color: #37520d; }
+.es-slide-3 h2 { font-weight: 600; font-size: clamp(22px, 4.25vw, 67px); }
+
 .es-hero-rule {
-  width: 72px; height: 2px; background: var(--es-gold);
-  margin: 16px auto; border: 0;
+  width: 20%; max-width: 146px; height: 2px;
+  background: #ac913a; border: 0;
+  margin: clamp(8px, 1.5vw, 26px) auto;
 }
+.es-slide-2 .es-hero-rule { width: 27%; max-width: 176px; background: #8f8a4a; }
+.es-slide-3 .es-hero-rule {
+  width: 33%; max-width: 228px; height: 1.5px; background: #cba75e;
+  margin: clamp(8px, 1.55vw, 26px) auto;
+}
+
 .es-hero p {
   font-family: var(--es-serif); font-style: italic;
-  font-size: clamp(15px, 1.25vw, 18px); color: #5a4e3d;
-  margin: 0 auto 22px; max-width: 27em;
+  font-size: clamp(11px, 1.67vw, 27px); line-height: 1.42;
+  color: #4a4034; margin: 0 auto clamp(12px, 2.3vw, 38px); max-width: 24em;
 }
-.es-hero .es-btn { align-self: center; }
+.es-slide-2 p, .es-slide-3 p { color: #26241f; }
+.es-slide-2 p { max-width: 19em; }
+.es-slide-3 p { max-width: 18.2em; }
+/* Banner 2 sets its button against the left of the text block, not centred
+   under it, which is also what keeps it clear of the gift box. */
+.es-slide-2 .es-btn { align-self: flex-start; margin-left: 1.9%; }
+
+/* Banner 3's four categories: icon above a two-line label, hairline between. */
+.es-hero-feats {
+  list-style: none; margin: 0 auto clamp(12px, 2.3vw, 38px); padding: 0;
+  max-width: 93%;   /* the row stops where the artwork stops it */
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.es-hero-feats li {
+  display: flex; flex-direction: column; align-items: center;
+  gap: clamp(3px, .62vw, 10px);
+  padding: 0 clamp(4px, 1.1vw, 18px);
+  border-left: 1px solid rgba(176, 146, 86, .5);
+}
+.es-hero-feats li:first-child { border-left: 0; }
+.es-hero-feats svg {
+  flex: none; width: clamp(18px, 2.9vw, 48px); height: auto; color: #8a6b32;
+}
+.es-hero-feats span {
+  font-family: var(--es-sans); font-size: clamp(8px, 1.33vw, 22px);
+  line-height: 1.2; color: #2b2825;
+}
+
+.es-hero .es-btn {
+  align-self: center;
+  font-size: clamp(9px, 1.17vw, 19px); letter-spacing: .12em;
+  padding: clamp(8px, 1.37vw, 22px) clamp(14px, 2.9vw, 47px);
+  border-radius: clamp(3px, .45vw, 8px);
+}
+
+/* Controls. Anything that moves on its own needs a way to stop it, so the
+   dots are joined by a pause; the script also halts on hover and on focus. */
+.es-hero-nav {
+  position: absolute; z-index: 4; left: 0; right: 0;
+  bottom: clamp(10px, 1.5vw, 26px);
+  display: flex; justify-content: center; align-items: center;
+  gap: clamp(7px, .8vw, 13px);
+}
+.es-hero-dot, .es-hero-play {
+  padding: 0; cursor: pointer; border-radius: 50%;
+  border: 1px solid rgba(58, 80, 9, .45);
+  background: rgba(255, 255, 255, .72);
+  box-shadow: 0 2px 8px -3px rgba(40, 34, 20, .45);
+  transition: background .25s ease, transform .25s ease, border-color .25s ease;
+}
+.es-hero-dot { width: 11px; height: 11px; }
+.es-hero-dot:hover { border-color: var(--es-cta); }
+.es-hero-dot.is-on {
+  background: var(--es-cta); border-color: var(--es-cta); transform: scale(1.2);
+}
+.es-hero-play {
+  width: 25px; height: 25px; margin-left: 5px;
+  display: grid; place-items: center; color: var(--es-cta);
+}
+.es-hero-play svg { width: 11px; height: 11px; display: block; }
+.es-hero-dot:focus-visible, .es-hero-play:focus-visible {
+  outline: 2px solid var(--es-cta); outline-offset: 3px;
+}
 
 /* ---------- foliage ---------- */
 
@@ -156,14 +260,6 @@ body.es-page {
 .es-foliage {
   position: absolute; z-index: 1; pointer-events: none;
   color: #7f9158; overflow: visible;
-}
-.es-foliage-top {
-  top: -22px; right: -38px; width: 236px; height: 131px;
-  transform: scaleX(-1) rotate(12deg); opacity: .8;
-}
-.es-foliage-edge {
-  bottom: -30px; right: -48px; width: 152px; height: 85px;
-  transform: rotate(196deg); opacity: .42;
 }
 
 /* ---------- section furniture ---------- */
@@ -392,7 +488,12 @@ body.es-page {
 }
 .es-footer-brand .es-brand-name { color: #fff; font-size: 20px; }
 .es-footer-brand .es-brand-tag { color: rgba(238, 240, 228, .75); }
-.es-footer-brand svg { color: rgba(238, 240, 228, .85); }
+.es-footer-brand svg {
+  color: rgba(238, 240, 228, .9);
+  --es-logo-green: #b9ce8e;
+  --es-logo-green-dark: #9fb972;
+  --es-logo-halo: #46522c;   /* the footer background, so leaves still separate */
+}
 .es-footer-mid { font-size: 15px; color: rgba(238, 240, 228, .9); }
 .es-footer-links { display: flex; align-items: center; gap: 26px; }
 .es-footer-links a {
@@ -417,13 +518,10 @@ body.es-page {
 @media (max-width: 1023px) {
   .es-canvas { width: 260px; }
   .es-car-track { gap: 24px; }
-  .es-hero { grid-template-columns: 1fr; }
-  .es-hero-media { min-height: 280px; }
-  .es-hero-body { padding: 44px 28px; }
-  /* Stacked, the top sprig would land over the photograph, so the only
-     foliage left is the one at the foot of the copy. */
-  .es-foliage-top { display: none; }
-  .es-foliage-edge { width: 132px; height: 74px; right: -34px; bottom: -22px; opacity: .4; }
+  /* A little more room for the copy before each banner has to stack. */
+  .es-copy-right { left: 51%; right: 3.5%; }
+  .es-copy-left  { left: 3%;  right: 57%; }
+  .es-copy-wide  { left: 3%;  right: 52%; }
   .es-split { grid-template-columns: 1fr; }
   .es-split > :first-child { padding-right: 0; border-right: 0; border-bottom: 1px solid var(--es-rule); }
   .es-split > :last-child { padding-left: 0; }
@@ -434,6 +532,33 @@ body.es-page {
 }
 
 @media (max-width: 860px) {
+  /* Too narrow to read copy over a picture, so each banner stacks: the
+     artwork crops to its own product side and the copy moves onto the wash
+     below, where it has the full width to reflow. */
+  .es-hero-art { aspect-ratio: 16 / 10; max-height: 46vh; }
+  .es-slide-1 .es-hero-art { object-position: 26% 50%; }
+  .es-slide-2 .es-hero-art { object-position: 76% 50%; }
+  .es-slide-3 .es-hero-art { object-position: 70% 50%; }
+  /* The slides share one grid cell, so the shorter two grow their copy block
+     to fill the height the tallest one sets rather than leaving a gap. */
+  .es-hero-body, .es-copy-right, .es-copy-left, .es-copy-wide {
+    position: static; left: auto; right: auto;
+    flex: 1 1 auto; padding: 30px 22px 58px;
+  }
+  .es-hero h1, .es-hero h2 { font-size: clamp(26px, 7.2vw, 40px); line-height: 1.14; }
+  .es-slide-3 h2 { font-size: clamp(25px, 6.9vw, 38px); }
+  .es-hero-rule,
+  .es-slide-2 .es-hero-rule,
+  .es-slide-3 .es-hero-rule { width: 72px; max-width: none; height: 2px; margin: 14px auto; }
+  .es-hero p { font-size: clamp(15px, 4vw, 18px); margin-bottom: 20px; max-width: 28em; }
+  .es-hero .es-btn { font-size: 13px; letter-spacing: .07em; padding: 13px 24px; border-radius: 3px; }
+  /* Stacked, every block is centred, so banner 2 drops its left alignment. */
+  .es-slide-2 .es-btn { align-self: center; margin-left: 0; }
+  .es-hero-feats { margin-bottom: 20px; }
+  .es-hero-feats svg { width: 26px; }
+  .es-hero-feats span { font-size: 11.5px; }
+  .es-hero-nav { bottom: 16px; }
+
   .es-nav { display: none; }
   .es-nav.is-open {
     display: block; position: absolute; left: 0; right: 0; top: 100%;
@@ -464,7 +589,7 @@ body.es-page {
 @media (max-width: 400px) {
   .es-header-inner { gap: 10px; }
   .es-brand { min-width: 0; gap: 8px; }
-  .es-brand svg { width: 26px; height: 34px; }
+  .es-brand svg { width: 46px; height: 27px; }
   .es-brand-name { font-size: 16px; letter-spacing: .1em; }
   .es-brand-tag { font-size: 11px; margin-top: 3px; }
   .es-nav-toggle { padding: 7px 10px; font-size: 13px; }
@@ -474,7 +599,7 @@ body.es-page {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .es-reveal, .es-reveal.is-in { opacity: 1; transform: none; transition: none; }
-  .es-card, .es-btn { transition: none; }
+  .es-card, .es-btn, .es-slide { transition: none; }
   .es-card:hover, .es-btn:hover { transform: none; }
   .es-car-track, .es-canvas { transition: none; }
 }

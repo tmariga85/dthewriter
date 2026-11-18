@@ -16,6 +16,7 @@ assets/css/                    theme stylesheets
 assets/js/                     theme scripts + mailto-contact.js
 assets/images/                 photography, book cover, logos
 assets/vendors/                GSAP, Flickity, Isotope, jQuery, Bootstrap, etc.
+tools/banner/                  the three supplied banner artworks + the script that clears their text
 CNAME                          custom domain for GitHub Pages
 ```
 
@@ -86,7 +87,8 @@ supplied PDFs (see below).
 
 | File | Used for |
 |---|---|
-| `hero-gift-box.jpg` | Hero photograph &mdash; a 1.6:1 crop of the main banner (x 500, y 40, 1170&times;731), wide enough for the shallow banner |
+| `hero-1.jpg` `hero-2.jpg` `hero-3.jpg` | The three banners &mdash; the supplied 1774&times;887 artworks with their baked-in wording painted out (see below) |
+| `hero-gift-box.jpg` | Superseded by the banners; kept only as a fallback crop, nothing links to it |
 | `teacher-thoughtful.jpg` | The Thoughtful Gift |
 | `teacher-appreciation.jpg` | The Appreciation Gift |
 | `teacher-signature.jpg` | The Signature Gift |
@@ -120,22 +122,64 @@ continuously, snapping back by one set with the transition off once it leaves th
 A press within 12px counts as a click: on a side canvas it centres it, on the centred one it
 opens that canvas's enquiry.
 
-### Banner and closing band
+### Banner carousel and closing band
 
-Both follow design cues supplied as images. The banner is wide and shallow — the
-photograph runs to the left edge at about 54% of the width, the copy sits on a cream-to-sage
-wash, and the whole thing is roughly 430px tall rather than the 560px it was. That height is
-set by the photograph's own 1.6:1 crop, so nothing in the box is cut off. The closing band is
-a slim cream strip: branch at the left, copy centred, button at the right-hand end. The copy
-carries a 90px left padding so it reads as centred on the band rather than on the space the
-button leaves.
+**The banner is three supplied artworks on a rotation.** Each arrived at 1774&times;887 with
+its heading, rule, paragraph and button printed into the picture. Baked-in text cannot
+reflow, cannot be selected or translated, and turns to mush on a phone, so it is painted
+out of every one and set live over the space it left. The artworks and the script that
+clears them live in `tools/banner/`, which also documents the method and the one number
+that tells you a clearing rectangle has gone too far.
 
-The foliage in both is one `<symbol id="es-branch">` near the top of the page, placed with
-`<use>` and turned by the `.es-foliage-*` rules. Drawing it once keeps every sprig identical;
-changing the leaf shape in that one `<g id="es-leaf">` changes all of them. Stacked layouts
-drop the sprigs that would otherwise land over the photograph or the heading.
+The three differ in where their copy belongs, because the product is on a different side in
+each: banner 1 puts it on the right, banners 2 and 3 on the left. Banner 3 also carries a
+four-category row — Corporate Gifts, Home &amp; Lifestyle, Wellness &amp; Self-Care, Special
+Occasions — drawn as live SVG icons rather than lifted from the picture. Banners 2 and 3
+set their second heading line in green (`.es-h-green`); banner 1 is all brown. Live type
+colours were sampled off the artworks: headings `#5a3b1c` and `#6b3e11` / `#37520d`, rules
+`#ac913a`, `#8f8a4a` and `#cba75e`, and the button `#3a5009`, now `--es-cta`.
+
+The slides share a single CSS grid cell (`grid-area: 1 / 1`) and cross-fade, so the hero
+never changes height as it rotates. The copy on each is sized in `vw` so the type keeps
+pace with the picture rather than drifting out of proportion as the window changes. Two
+things to know before touching the sizes:
+
+- **`height: auto` on each banner `<img>` is load-bearing.** The `width`/`height`
+  attributes are presentational hints, so without it `height: 887px` beats `aspect-ratio`
+  and the banner comes out too tall.
+- **Playfair sets wider than the face in the artwork**, so banners 2 and 3 take a slightly
+  smaller heading than banner 1 to keep their second line on one line and clear of the
+  gift box. The box's left edge slants, so the usable width shrinks as the copy goes down;
+  `tools/banner/README.md` lists where it falls on each.
+
+The rotation is in the page's own script: a 7-second cross-fade that stops on hover, on
+focus, when the tab is hidden, and when the visitor asks for reduced motion. There are dots
+and a pause button, arrow-key support, and swipe for the stacked layout. Below 860px each
+banner stacks — the artwork crops to its own product side (`object-position` per slide) and
+the copy moves onto the wash below it, where it has the full width to reflow.
+
+The closing band is unchanged: a slim cream strip, branch at the left, copy centred, button
+at the right-hand end, with a 90px left padding on the copy so it reads as centred on the
+band rather than on the space the button leaves.
+
+The band's foliage is a `<symbol id="es-branch">` near the top of the page, placed with
+`<use>` and turned by the `.es-foliage-*` rules. Drawing it once keeps every sprig
+identical; changing the leaf shape in that one `<g id="es-leaf">` changes all of them. The
+banner no longer uses it — the artwork carries its own leaves.
+
+One fix fell out of this work: `.es-page a { color: inherit }` is a class plus a type, so it
+outranked the plain `.es-btn`, and every button on the page had been rendering its label in
+ink rather than white. The button rule now also matches `a.es-btn`, which settles it on
+source order.
 
 Buttons are set in a system sans (`--es-sans`), not Lora — the cues show them that way.
+
+The brand mark in the header and footer is the real Elevating Spaces logo — a roof with a
+chimney over an olive branch — redrawn as SVG from the artwork printed on the supplied
+banner image. It is landscape (120×70), not the portrait sprout it replaced. The roof takes
+`currentColor` and the leaves read `--es-logo-green` / `--es-logo-green-dark`, which is how
+the footer lightens the whole mark against the olive background; `--es-logo-halo` is the
+thin outline that keeps overlapping leaves apart and is set to whatever sits behind it.
 
 ### Rendering the canvas PDFs
 
