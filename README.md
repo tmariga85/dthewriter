@@ -109,7 +109,7 @@ Mail (`MX`) and `SPF` records are untouched, so email keeps running on Afrihost.
 
 ## Elevating Spaces page
 
-`elevating-spaces.html` is a standalone page for the Elevating Spaces brand, with its own
+`elevatingspaces.html` is a standalone page for the Elevating Spaces brand, with its own
 stylesheet at `assets/css/elevating-spaces.css`. It is linked from both menus on the landing
 page and listed in the sitemap.
 

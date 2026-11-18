@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>
+/* GitHub Pages redirects http to https, but a page already sitting in a
+   browser cache from before that was switched on is served straight from disk
+   without asking the network, so the redirect never runs and the address bar
+   still says "Not secure". GitHub sends no HSTS header for custom domains,
+   which is what would normally pre-empt that, so this does the same job in one
+   line. It must stay first in the head, before anything else loads. */
+if (location.protocol === 'http:' && location.hostname.indexOf('dthewriter.co.za') !== -1) {
+  location.replace('https://' + location.host + location.pathname + location.search + location.hash);
+}
+</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elevating Spaces &ndash; Thoughtful gifts. Meaningful spaces.</title>
+<meta name="description" content="Elevating Spaces: beautifully curated gift collections, original inspirational canvas art and home styling services from Johannesburg, South Africa.">
+<link rel="canonical" href="https://www.dthewriter.co.za/elevatingspaces.html">
+
+<!-- The Elevating Spaces mark, so the tab, the bookmark and a shared link all
+     carry the brand rather than a blank page icon. The SVG is used where it is
+     supported and the PNGs cover everything else. -->
+<link rel="icon" href="assets/images/elevating/icon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/images/elevating/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/images/elevating/icon-180.png">
+<meta property="og:image" content="https://www.dthewriter.co.za/assets/images/elevating/icon-512.png">
+<meta property="og:image:alt" content="The Elevating Spaces mark: a roof with a chimney above an olive branch.">
+<meta property="og:title" content="Elevating Spaces &ndash; Thoughtful gifts. Meaningful spaces.">
+<meta property="og:description" content="Beautifully curated gifts, inspirational art and thoughtful touches that make every space and occasion more meaningful.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.dthewriter.co.za/elevatingspaces.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/elevating-spaces.css">
+<link rel="stylesheet" href="assets/css/whatsapp-float.css">
+</head>
+
+<body class="es-page">
+
+<a class="es-skip" href="#main">Skip to content</a>
+
+<!-- Botanical branch, drawn once here and placed with <use> wherever a
+     section needs foliage. One definition keeps every sprig identical. -->
+<svg class="es-sprite" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- One blade of the olive branch inside the house mark. -->
+    <g id="es-logo-leaf">
+      <path d="M0 0C2.2 -6.1 11 -7.8 24 0 11 7.8 2.2 6.1 0 0Z"
+            stroke="var(--es-logo-halo, #fbf8f0)" stroke-width=".9"/>
+      <path d="M2 0C8.5 -1.3 15.5 -1.8 22 -.5" fill="none" stroke="#f4f6ea"
+            stroke-opacity=".5" stroke-width=".9" stroke-linecap="round"/>
+    </g>
+    <!-- Carousel pause / play, swapped by the script. -->
+    <g id="es-icon-pause" fill="currentColor"><rect x="4" y="3" width="3" height="10" rx="1"/><rect x="9" y="3" width="3" height="10" rx="1"/></g>
+    <g id="es-icon-play" fill="currentColor"><path d="M5 3.2 13 8l-8 4.8Z"/></g>
+    <g id="es-leaf">
+      <path d="M0 0C6 -13 22 -16 36 -8 22 7 6 11 0 0Z" fill="currentColor"/>
+      <path d="M3 1C13 -3 24 -5 33 -7" fill="none" stroke="#fdfcf6"
+            stroke-opacity=".4" stroke-width="1.1" stroke-linecap="round"/>
+    </g>
+  </defs>
+  <symbol id="es-branch" viewBox="0 0 212 118">
+    <path d="M4 14C60 20 120 44 186 96" fill="none" stroke="#8d7757"
+          stroke-width="2.4" stroke-linecap="round"/>
+      <use href="#es-leaf" transform="translate(17.5 15.8) rotate(-31.0) scale(1.00)"/>
+      <use href="#es-leaf" transform="translate(17.5 15.8) rotate(53.0) scale(0.92)"/>
+      <use href="#es-leaf" transform="translate(41.6 20.7) rotate(-26.0) scale(0.94)"/>
+      <use href="#es-leaf" transform="translate(41.6 20.7) rotate(58.0) scale(0.87)"/>
+      <use href="#es-leaf" transform="translate(66.1 27.9) rotate(-21.1) scale(0.89)"/>
+      <use href="#es-leaf" transform="translate(66.1 27.9) rotate(62.9) scale(0.82)"/>
+      <use href="#es-leaf" transform="translate(91.3 37.8) rotate(-16.3) scale(0.83)"/>
+      <use href="#es-leaf" transform="translate(91.3 37.8) rotate(67.7) scale(0.77)"/>
+      <use href="#es-leaf" transform="translate(117.0 50.3) rotate(-11.9) scale(0.78)"/>
+      <use href="#es-leaf" transform="translate(117.0 50.3) rotate(72.1) scale(0.72)"/>
+      <use href="#es-leaf" transform="translate(143.3 65.6) rotate(-7.7) scale(0.72)"/>
+      <use href="#es-leaf" transform="translate(143.3 65.6) rotate(76.3) scale(0.67)"/>
+      <use href="#es-leaf" transform="translate(176.1 88.4) rotate(31.0) scale(0.6)"/>
+  </symbol>
+</svg>
+
+<!-- ============ header ============ -->
+<header class="es-header">
+
+  <!-- Elevating Spaces is a brand page inside D the Writer's site, so there is
+       always a way back to the main site. It rides inside the sticky header,
+       which keeps it reachable however far down the page you are. -->
+  <div class="es-backbar">
+    <div class="es-wrap">
+      <a class="es-back" href="/">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <path d="M9.6 3.3 4.9 8l4.7 4.7" fill="none" stroke="currentColor"
+                stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back to D the Writer
+      </a>
+    </div>
+  </div>
+
+  <div class="es-wrap es-header-inner">
+
+    <a class="es-brand" href="#top" aria-label="Elevating Spaces, home">
+      <!-- The Elevating Spaces mark: a roof with a chimney, an olive branch
+           beneath it. The frame takes currentColor so the footer can lighten it;
+           the leaves read --es-logo-green. -->
+      <svg class="es-logo" viewBox="0 0 120 70" fill="none" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="2.4" stroke-linejoin="miter">
+          <path d="M1.2 53.2V50.5L57.3 3.4 117.8 50.5v2.7"/>
+          <path d="M82.9 25.6V11h13.4v23"/>
+          <path d="M16 47.9v18" stroke-width="3.3"/>
+        </g>
+        <path d="M30.5 64.9C40 58.5 56 49.5 80.5 45.1" stroke="var(--es-logo-green, #687636)"
+              stroke-width="1.6" stroke-linecap="round"/>
+        <g fill="var(--es-logo-green, #687636)">
+          <use href="#es-logo-leaf" transform="translate(46.1 52.4) rotate(-75.6) scale(1.08)" fill="var(--es-logo-green-dark, #5a6a2b)"/>
+          <use href="#es-logo-leaf" transform="translate(63.4 48.2) rotate(-62.3) scale(.96)"/>
+          <use href="#es-logo-leaf" transform="translate(78 45.7) rotate(3.5) scale(.86)"/>
+          <use href="#es-logo-leaf" transform="translate(48.8 54.3) rotate(31.5) scale(.93)" fill="var(--es-logo-green-dark, #5a6a2b)"/>
+          <use href="#es-logo-leaf" transform="translate(65.2 51.2) rotate(28.8) scale(.9)"/>
+        </g>
+      </svg>
+      <span>
+        <span class="es-brand-name">Elevating Spaces</span>
+        <span class="es-brand-tag">Created for meaningful spaces.</span>
+      </span>
+    </a>
+
+    <button class="es-nav-toggle" type="button" aria-expanded="false" aria-controls="es-nav">Menu</button>
+
+    <nav class="es-nav" id="es-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#top" class="is-current">Home</a></li>
+        <li><a href="#gift-collections">Gift Collections</a></li>
+        <li><a href="#voice-of-inspiration">The Voice of Inspiration</a></li>
+        <li><a href="#home-services">Services</a></li>
+        <li><a href="#our-story">Our Story</a></li>
+        <li><a href="#enquire">Enquire</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ hero ============ -->
+  <!-- Three supplied banner artworks, cross-fading on a timer.
+       Each arrived with its heading, rule, paragraph and button printed into
+       the picture; tools/banner/inpaint-banner.mjs clears that wording and the
+       copy below is set live over the space it left, so it stays selectable,
+       translatable and able to reflow on a phone. Slide 1 carries its copy on
+       the right because its gift box sits on the left; slides 2 and 3 are the
+       other way round. -->
+  <section class="es-hero" id="top" aria-roledescription="carousel"
+           aria-label="Elevating Spaces banners">
+
+    <article class="es-slide es-slide-1 is-active" role="group"
+             aria-roledescription="slide" aria-label="1 of 3: Thoughtful gifts">
+      <img class="es-hero-art" src="assets/images/elevating/hero-1.jpg" width="1774" height="887"
+           fetchpriority="high" decoding="async"
+           alt="An open Elevating Spaces gift box on marble under soft greenery, holding a candle, a linen-bound journal, honey, tea, chocolates and a branded tumbler.">
+      <div class="es-hero-body es-copy-right">
+        <h1>Thoughtful gifts.<br>Meaningful spaces.</h1>
+        <hr class="es-hero-rule">
+        <p>Beautifully curated gifts, inspirational art and thoughtful touches that make every space and occasion more meaningful.</p>
+        <a class="es-btn" href="#gift-collections">Explore our gift collections</a>
+      </div>
+    </article>
+
+    <article class="es-slide es-slide-2" role="group" aria-hidden="true"
+             aria-roledescription="slide" aria-label="2 of 3: The Voice of Inspiration box">
+      <img class="es-hero-art" src="assets/images/elevating/hero-2.jpg" width="1774" height="887"
+           fetchpriority="low" decoding="async"
+           alt="An Elevating Spaces gift box holding a framed inspirational canvas, a green journal, Twinings teas, honey, a ribboned candle, Lindt chocolate and a branded tumbler.">
+      <div class="es-hero-body es-copy-left">
+        <h2>Thoughtful gifts.<br><span class="es-h-green">Meaningful spaces.</span></h2>
+        <hr class="es-hero-rule">
+        <p>Beautifully curated gifts, inspirational art and thoughtful touches that make every space and occasion more meaningful.</p>
+        <a class="es-btn" href="#gift-collections">Explore our gift collections</a>
+      </div>
+    </article>
+
+    <article class="es-slide es-slide-3" role="group" aria-hidden="true"
+             aria-roledescription="slide" aria-label="3 of 3: Curated gifts for every occasion">
+      <img class="es-hero-art" src="assets/images/elevating/hero-3.jpg" width="1774" height="887"
+           fetchpriority="low" decoding="async"
+           alt="An Elevating Spaces gift set on marble: an olive box with a green ribbon, a lit candle, a reed diffuser, a branded tumbler, honey, a green notebook and a knitted throw.">
+      <div class="es-hero-body es-copy-left es-copy-wide">
+        <h2>Curated Gifts<br><span class="es-h-green">for Every Occasion.</span></h2>
+        <hr class="es-hero-rule">
+        <ul class="es-hero-feats">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2.4" y="7.4" width="19.2" height="4.4" rx="1"/>
+              <path d="M4.3 11.8V21.4h15.4V11.8M12 7.4v14"/>
+              <path d="M12 7.4C9.2 7.4 7 6.2 7.5 4.3 7.9 2.8 10.6 3.6 12 7.4ZM12 7.4c2.8 0 5-1.2 4.5-3.1-.4-1.5-3.1-.7-4.5 3.1Z"/>
+            </svg>
+            <span>Corporate<br>Gifts</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2.6 11.4 12 3.2l9.4 8.2"/>
+              <path d="M5 9.9v11.5h14V9.9"/>
+              <path d="M9.7 21.4v-6.1h4.6v6.1"/>
+            </svg>
+            <span>Home &amp;<br>Lifestyle</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 21.2v-7.6"/>
+              <path d="M12 13.6C8.4 13.6 5.4 11 4.9 7.4c4.1-.4 7.1 2.2 7.1 6.2Z"/>
+              <path d="M12 13.6c3.6 0 6.6-2.6 7.1-6.2-4.1-.4-7.1 2.2-7.1 6.2Z"/>
+              <path d="M12 11.6c-1.9-2.5-1.7-6 0-8.4 1.7 2.4 1.9 5.9 0 8.4Z"/>
+            </svg>
+            <span>Wellness<br>&amp; Self-Care</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3.3l2.5 5.7 6.2.6-4.7 4.1 1.4 6.1L12 16.7l-5.4 3.1 1.4-6.1-4.7-4.1 6.2-.6Z"/>
+            </svg>
+            <span>Special<br>Occasions</span>
+          </li>
+        </ul>
+        <p>Unique, high-quality gifts that inspire, appreciate and bring people closer.</p>
+        <a class="es-btn" href="#gift-collections">Explore our collections</a>
+      </div>
+    </article>
+
+    <div class="es-hero-nav">
+      <button class="es-hero-dot is-on" type="button" aria-current="true" aria-label="Show banner 1"></button>
+      <button class="es-hero-dot" type="button" aria-label="Show banner 2"></button>
+      <button class="es-hero-dot" type="button" aria-label="Show banner 3"></button>
+      <button class="es-hero-play" type="button" aria-pressed="false" aria-label="Pause the banners">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><use href="#es-icon-pause"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ teacher appreciation ============ -->
+  <section class="es-section" id="gift-collections">
+    <div class="es-wrap">
+
+      <div class="es-head es-reveal">
+        <h2>Teacher Appreciation Collection</h2>
+        <p>Thoughtful ways to say thank you to the teachers who make a difference.</p>
+      </div>
+
+      <div class="es-cards es-cards-3 es-reveal">
+
+        <a class="es-card" href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%0A%0AI'd%20like%20to%20order%20The%20Thoughtful%20Gift.%0A%0AQuantity%3A%0ANeeded%20by%3A%0ADelivery%20address%3A%0A%0AThank%20you%2C" target="_blank" rel="noopener">
+          <figure class="es-photo" data-slot="The Thoughtful Gift &mdash; box with framed quote, tea and chocolates">
+            <img src="assets/images/elevating/teacher-thoughtful.jpg" alt="The Thoughtful Gift box containing a framed inspirational quote, boxed tea, honey and chocolates.">
+          </figure>
+          <div class="es-card-body">
+            <p class="es-card-title">The Thoughtful Gift</p>
+            <p class="es-card-sub">Affordable collection</p>
+          </div>
+        </a>
+
+        <a class="es-card" href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%0A%0AI'd%20like%20to%20order%20The%20Appreciation%20Gift.%0A%0AQuantity%3A%0ANeeded%20by%3A%0ADelivery%20address%3A%0A%0AThank%20you%2C" target="_blank" rel="noopener">
+          <figure class="es-photo" data-slot="The Appreciation Gift &mdash; framed quote, journal and keepsakes">
+            <img src="assets/images/elevating/teacher-appreciation.jpg" alt="The Appreciation Gift box containing a framed quote, a floral journal, wooden coasters and a keyring.">
+          </figure>
+          <div class="es-card-body">
+            <p class="es-card-title">The Appreciation Gift</p>
+            <p class="es-card-sub">Sought-after collection</p>
+          </div>
+        </a>
+
+        <a class="es-card" href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%0A%0AI'd%20like%20to%20order%20The%20Signature%20Gift.%0A%0AQuantity%3A%0ANeeded%20by%3A%0ADelivery%20address%3A%0A%0AThank%20you%2C" target="_blank" rel="noopener">
+          <figure class="es-photo" data-slot="The Signature Gift &mdash; framed canvas, notebook, candle and chocolates">
+            <img src="assets/images/elevating/teacher-signature.jpg" alt="The Signature Gift box containing a framed canvas print, a leather notebook, a scented candle and chocolates.">
+          </figure>
+          <div class="es-card-body">
+            <p class="es-card-title">The Signature Gift</p>
+            <p class="es-card-sub">Premium collection</p>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="es-btn-row es-reveal">
+        <a class="es-btn" href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%0A%0AI'd%20like%20to%20enquire%20about%20the%20Teacher%20Appreciation%20Collection.%0A%0AWhich%20gift%3A%0AQuantity%3A%0ANeeded%20by%3A%0A%0AThank%20you%2C" target="_blank" rel="noopener">Enquire / Order</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ corporate gifting ============ -->
+  <section class="es-section">
+    <div class="es-wrap">
+
+      <div id="corporate-gifts">
+        <div class="es-head es-reveal">
+          <h2>The Meaningful Connections Collection</h2>
+          <p>Corporate gifts that leave a lasting impression.</p>
+        </div>
+
+        <div class="es-cards es-cards-2 es-reveal">
+          <a class="es-card" href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%0A%0AI'd%20like%20to%20enquire%20about%20The%20Appreciation%20Box%20for%20our%20team%20or%20clients.%0A%0ACompany%3A%0AQuantity%3A%0ANeeded%20by%3A%0ABranding%20required%3A%0A%0AThank%20you%2C" target="_blank" rel="noopener">
+            <figure class="es-photo" data-slot="The Appreciation Box &mdash; framed quote, notebook and chocolates">
+              <img src="assets/images/elevating/corporate-appreciation.jpg" alt="The Appreciation Box containing a framed quote print, a floral notebook and boxed chocolates.">
+            </figure>
+            <div class="es-card-body">
+              <p class="es-card-title">The Appreciation Box</p>
+              <p class="es-card-sub">Employee and client appreciation</p>
+            </div>
+          </a>
+
+          <a class="es-card" href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%0A%0AI'd%20like%20to%20enquire%20about%20The%20Signature%20Box%20for%20our%20executives%20or%20clients.%0A%0ACompany%3A%0AQuantity%3A%0ANeeded%20by%3A%0ABranding%20required%3A%0A%0AThank%20you%2C" target="_blank" rel="noopener">
+            <figure class="es-photo" data-slot="The Signature Box &mdash; framed canvas, pen, tumbler and keyring">
+              <img src="assets/images/elevating/corporate-signature.jpg" alt="The Signature Box containing a framed canvas print, a pen, a black tumbler and a keyring.">
+            </figure>
+            <div class="es-card-body">
+              <p class="es-card-title">The Signature Box</p>
+              <p class="es-card-sub">Executive and premium gifting</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="es-btn-row es-reveal">
+          <a class="es-btn" href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%0A%0AI'd%20like%20to%20enquire%20about%20corporate%20gifting.%0A%0ACompany%3A%0AQuantity%3A%0ABudget%20per%20gift%3A%0ANeeded%20by%3A%0A%0AThank%20you%2C" target="_blank" rel="noopener">Enquire / Order</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ the voice of inspiration ============ -->
+  <section class="es-section">
+    <div class="es-wrap">
+
+      <div id="voice-of-inspiration">
+        <div class="es-head es-reveal">
+          <h2>The Voice of Inspiration Collection</h2>
+          <p>Words that inspire. Art that speaks to the soul.</p>
+        </div>
+
+        <p class="es-voice-intro es-reveal">Original inspirational canvas wall art created to awaken hope, encourage fresh perspectives and bring beauty and purpose into everyday spaces.</p>
+
+        <div class="es-carousel es-reveal" data-canvas-carousel>
+          <button class="es-car-nav es-car-prev" type="button" aria-label="Previous canvas" aria-controls="es-car-track">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 5 8 12l7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <div class="es-car-viewport">
+            <div class="es-car-track" id="es-car-track">
+
+          <a class="es-canvas" href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%0A%0AI'd%20like%20to%20enquire%20about%20the%20'We%20are%20all%20seeds'%20canvas.%0A%0ASize%20of%20interest%3A%0ARoom%20or%20space%3A%0A%0AThank%20you%2C" target="_blank" rel="noopener">
+            <figure class="es-photo" data-slot="&lsquo;We are all seeds&rsquo; canvas">
+              <img src="assets/images/elevating/canvas-seeds.jpg" alt="Canvas artwork of a sunlit green field at dusk, lettered: We are all seeds scattered across the field, whoever yields what pleases the farmer, makes it to the barn.">
+            </figure>
+            <p class="es-canvas-title">We Are Seeds</p>
+          </a>
+
+          <a class="es-canvas" href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%0A%0AI'd%20like%20to%20enquire%20about%20the%20'Pebbles%20of%20Yesterday'%20canvas.%0A%0ASize%20of%20interest%3A%0ARoom%20or%20space%3A%0A%0AThank%20you%2C" target="_blank" rel="noopener">
+            <figure class="es-photo" data-slot="&lsquo;Pebbles of Yesterday&rsquo; canvas">
+              <img src="assets/images/elevating/canvas-pebbles.jpg" alt="Canvas artwork of pale stones in a still mountain lake, lettered: The pebbles of yesterday, have become our stubborn mountains today.">
+            </figure>
+            <p class="es-canvas-title">Pebbles of Yesterday</p>
+          </a>
+
+          <a class="es-canvas" href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%0A%0AI'd%20like%20to%20enquire%20about%20the%20'Let%20our%20hearts%20be%20gentle'%20canvas.%0A%0ASize%20of%20interest%3A%0ARoom%20or%20space%3A%0A%0AThank%20you%2C" target="_blank" rel="noopener">
+            <figure class="es-photo" data-slot="&lsquo;Let our hearts be gentle&rsquo; canvas">
+              <img src="assets/images/elevating/canvas-gentle.jpg" alt="Canvas artwork of a sunset over forested mountains, lettered: Let our hearts be gentle, our intentions pure. Let us enjoy today, like tomorrow is not certain.">
+            </figure>
+            <p class="es-canvas-title">Let Our Hearts Be Gentle</p>
+          </a>
+
+          <a class="es-canvas" href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%0A%0AI'd%20like%20to%20enquire%20about%20the%20'Dad%2C%20you%20are%20the%20Man'%20canvas.%0A%0ASize%20of%20interest%3A%0ARoom%20or%20space%3A%0A%0AThank%20you%2C" target="_blank" rel="noopener">
+            <figure class="es-photo" data-slot="&lsquo;Dad, you are the Man&rsquo; canvas">
+              <img src="assets/images/elevating/canvas-dad.jpg" alt="Canvas artwork of a mountain road under a clear sky, lettered: Many words fill my mind, but you never had to say much. Dad, you are the Man.">
+            </figure>
+            <p class="es-canvas-title">Dad, You Are The Man</p>
+            </a>
+
+            </div>
+          </div>
+
+          <button class="es-car-nav es-car-next" type="button" aria-label="Next canvas" aria-controls="es-car-track">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m9 5 7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <div class="es-car-dots" role="tablist" aria-label="Choose a canvas"></div>
+        </div>
+
+        <div class="es-btn-row es-reveal">
+          <a class="es-btn" href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%0A%0AI'd%20like%20to%20see%20more%20of%20The%20Voice%20of%20Inspiration%20canvas%20art.%0A%0APiece%20or%20size%20of%20interest%3A%0ARoom%20or%20space%3A%0A%0AThank%20you%2C" target="_blank" rel="noopener">Explore the collection</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ christmas + home services ============ -->
+  <section class="es-section" style="padding: 0;" id="christmas-collection">
+    <div class="es-wrap es-split">
+
+      <!-- Hover this block and snow falls, settles into a drift and builds a
+           snowman out of it. The canvas takes no pointer events and the call
+           to action sits above it, so nothing here stops being clickable. -->
+      <div id="christmas" class="es-snowzone">
+        <canvas class="es-snow" aria-hidden="true"></canvas>
+
+        <div class="es-head es-reveal">
+          <h2>Christmas Collection</h2>
+        </div>
+
+        <div class="es-christmas es-reveal">
+          <figure class="es-photo" data-slot="Christmas gift box with festive ribbon and decorations">
+            <img src="assets/images/elevating/christmas-box.jpg" alt="A kraft Christmas gift box tied with an olive ribbon, beside gingerbread houses, pine cones and baubles.">
+          </figure>
+          <div class="es-christmas-note">
+            <p class="es-soon">To be<br>unpacked soon&hellip;</p>
+            <p>Thoughtful festive gifting is on its way.</p>
+          </div>
+        </div>
+
+        <div class="es-btn-row es-reveal">
+          <a class="es-btn" href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%0A%0APlease%20let%20me%20know%20when%20the%20Christmas%20Collection%20launches.%0A%0AName%3A%0A%0AThank%20you%2C" target="_blank" rel="noopener">Tell me when it launches</a>
+        </div>
+      </div>
+
+      <div id="home-services">
+        <div class="es-head is-plain es-reveal">
+          <h2>Elevating the Spaces You Live In</h2>
+          <p>Decluttering, Home Organisation &amp; Home Improvement</p>
+        </div>
+
+        <!-- Each tile holds the same room twice and dissolves one state into
+             the other. The supplied artwork carries its own BEFORE / AFTER
+             label, so the fade says which is which without extra chrome.
+             Hovering or tabbing to a tile holds the after. -->
+        <div class="es-home-grid es-reveal">
+          <figure class="es-photo es-ba" data-slot="Living room, before and after">
+            <img class="es-ba-shot" src="assets/images/elevating/home-living-before.jpg"
+                 alt="Before: a bare linen corner sofa against an empty wall, with a stack of magazines on the coffee table.">
+            <img class="es-ba-shot es-ba-after" src="assets/images/elevating/home-living-after.jpg"
+                 alt="After: the same room styled with olive and green cushions, a vase of greenery, potted plants and a warm table lamp.">
+          </figure>
+          <figure class="es-photo es-ba" data-slot="Pantry, before and after">
+            <img class="es-ba-shot" src="assets/images/elevating/home-pantry-before.jpg"
+                 alt="Before: pantry shelves crowded with mismatched tubs, open packets and a paper bag.">
+            <img class="es-ba-shot es-ba-after" src="assets/images/elevating/home-pantry-after.jpg"
+                 alt="After: the same shelves holding matching labelled glass jars, woven baskets and a potted plant on the sill.">
+          </figure>
+        </div>
+
+        <p class="es-home-copy es-reveal">From decluttering and reorganising to home styling, interior revamps and practical improvements, we create spaces that are beautiful, functional and thoughtfully designed around your lifestyle.</p>
+
+        <div class="es-btn-row es-reveal">
+          <a class="es-btn" href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%0A%0AI'd%20like%20to%20enquire%20about%20your%20home%20services.%0A%0AWhat%20I%20need%20(decluttering%20%2F%20organising%20%2F%20styling%20%2F%20revamp)%3A%0ARooms%20involved%3A%0ASuburb%3A%0APreferred%20dates%3A%0A%0AThank%20you%2C" target="_blank" rel="noopener">Enquire about our services</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ our story ============ -->
+  <section class="es-section" id="our-story">
+    <div class="es-wrap">
+      <div class="es-head es-reveal">
+        <h2>Our Story</h2>
+        <p>Created for meaningful spaces.</p>
+      </div>
+      <p class="es-home-copy es-reveal" style="max-width: 46em; margin: 0 auto; font-size: 16px;">
+        Elevating Spaces began with a simple belief: that the things we surround ourselves with should mean
+        something. Every gift box is curated by hand, every canvas carries words written to encourage, and
+        every space we style is shaped around the people who live and work in it. From a single thank-you
+        gift for a teacher to a full home revamp, the intention is always the same &mdash; to leave a space,
+        and the person in it, lifted.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ closing band ============ -->
+  <section class="es-band" id="enquire">
+    <svg class="es-foliage es-foliage-band" aria-hidden="true"><use href="#es-branch"/></svg>
+    <div class="es-wrap es-band-inner">
+      <div class="es-band-copy">
+        <h2>Let&rsquo;s Create Something Meaningful</h2>
+        <p>Whether you&rsquo;re choosing a thoughtful gift, discovering inspirational art or transforming your home, we&rsquo;d love to hear from you.</p>
+      </div>
+      <a class="es-btn" href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%0A%0AEnquiry%20from%20the%20Elevating%20Spaces%20website%0A%0AName%3A%0APhone%3A" target="_blank" rel="noopener">Send an enquiry</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ footer ============ -->
+<footer class="es-footer">
+  <div class="es-wrap">
+    <div class="es-footer-inner">
+
+      <a class="es-brand es-footer-brand" href="#top">
+        <!-- The Elevating Spaces mark: a roof with a chimney, an olive branch
+             beneath it. The frame takes currentColor so the footer can lighten it;
+             the leaves read --es-logo-green. -->
+        <svg class="es-logo" viewBox="0 0 120 70" fill="none" aria-hidden="true">
+          <g stroke="currentColor" stroke-width="2.4" stroke-linejoin="miter">
+            <path d="M1.2 53.2V50.5L57.3 3.4 117.8 50.5v2.7"/>
+            <path d="M82.9 25.6V11h13.4v23"/>
+            <path d="M16 47.9v18" stroke-width="3.3"/>
+          </g>
+          <path d="M30.5 64.9C40 58.5 56 49.5 80.5 45.1" stroke="var(--es-logo-green, #687636)"
+                stroke-width="1.6" stroke-linecap="round"/>
+          <g fill="var(--es-logo-green, #687636)">
+            <use href="#es-logo-leaf" transform="translate(46.1 52.4) rotate(-75.6) scale(1.08)" fill="var(--es-logo-green-dark, #5a6a2b)"/>
+            <use href="#es-logo-leaf" transform="translate(63.4 48.2) rotate(-62.3) scale(.96)"/>
+            <use href="#es-logo-leaf" transform="translate(78 45.7) rotate(3.5) scale(.86)"/>
+            <use href="#es-logo-leaf" transform="translate(48.8 54.3) rotate(31.5) scale(.93)" fill="var(--es-logo-green-dark, #5a6a2b)"/>
+            <use href="#es-logo-leaf" transform="translate(65.2 51.2) rotate(28.8) scale(.9)"/>
+          </g>
+        </svg>
+        <span>
+          <span class="es-brand-name">Elevating Spaces</span>
+          <span class="es-brand-tag">Created for meaningful spaces.</span>
+        </span>
+      </a>
+
+      <p class="es-footer-mid">Johannesburg, South Africa</p>
+
+      <div class="es-footer-links">
+        <a href="mailto:deethewriter85@gmail.com?subject=Enquiry%20from%20the%20Elevating%20Spaces%20website">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+            <rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 6 9-6"/>
+          </svg>
+          Contact
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/>
+          </svg>
+          Instagram
+        </a>
+        <a href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%20I%27d%20like%20to%20enquire%20about%20your%20collections." target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+            <path d="M20 11.6a8 8 0 0 1-11.9 7L3.5 20l1.5-4.4A8 8 0 1 1 20 11.6Z"/>
+            <path d="M9 9.4c.3 2.6 2.4 4.6 5 4.9.5.1.9-.3 1-.8l.1-.7-2-.9-.8.8a5.3 5.3 0 0 1-2-2l.8-.8-.9-2-.7.1c-.5.1-.9.5-.5 1.4Z" fill="currentColor" stroke="none"/>
+          </svg>
+          WhatsApp
+        </a>
+      </div>
+
+    </div>
+
+    <p class="es-footer-legal">
+      &copy; <span id="es-year">2026</span> Elevating Spaces. All rights reserved. &nbsp;&middot;&nbsp;
+      <a href="index.html">dthewriter.co.za</a>
+    </p>
+  </div>
+</footer>
+
+<!-- ============ floating WhatsApp ============ -->
+<a class="wa-float" href="https://wa.me/27671820542?text=Hi%20Elevating%20Spaces%2C%20I%27d%20like%20to%20enquire%20about%20your%20collections."
+   target="_blank" rel="noopener" aria-label="Chat with Elevating Spaces on WhatsApp">
+  <span class="wa-float-label" aria-hidden="true">Chat with us</span>
+  <span class="wa-float-dot">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884a9.82 9.82 0 0 1 6.988 2.896 9.825 9.825 0 0 1 2.892 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+    </svg>
+  </span>
+</a>
+
+<script src="assets/js/canvas-carousel.js" defer></script>
+
+<script>
+(function () {
+  'use strict';
+
+  // Current year
+  var y = document.getElementById('es-year');
+  if (y) { y.textContent = new Date().getFullYear(); }
+
+  // Hero carousel: the three supplied banners, cross-faded on a timer.
+  // Hand-rolled rather than pulled in, because all it has to do is swap a
+  // class; the work is in knowing when NOT to advance.
+  (function () {
+    var hero = document.querySelector('.es-hero');
+    if (!hero) { return; }
+    var slides = [].slice.call(hero.querySelectorAll('.es-slide'));
+    var dots = [].slice.call(hero.querySelectorAll('.es-hero-dot'));
+    var play = hero.querySelector('.es-hero-play');
+    if (slides.length < 2) { return; }
+
+    var DELAY = 7000;
+    var calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var at = 0, timer = null;
+    var paused = calm.matches;          // no self-starting motion if asked
+
+    function show(n) {
+      at = (n + slides.length) % slides.length;
+      slides.forEach(function (slide, i) {
+        var on = i === at;
+        slide.classList.toggle('is-active', on);
+        slide.setAttribute('aria-hidden', on ? 'false' : 'true');
+        // visibility:hidden already drops these from the tab order, but the
+        // outgoing slide stays visible for the length of the fade.
+        [].slice.call(slide.querySelectorAll('a, button')).forEach(function (el) {
+          if (on) { el.removeAttribute('tabindex'); } else { el.setAttribute('tabindex', '-1'); }
+        });
+      });
+      dots.forEach(function (dot, i) {
+        dot.classList.toggle('is-on', i === at);
+        if (i === at) { dot.setAttribute('aria-current', 'true'); }
+        else { dot.removeAttribute('aria-current'); }
+      });
+    }
+
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function start() { stop(); if (!paused) { timer = setInterval(function () { show(at + 1); }, DELAY); } }
+
+    dots.forEach(function (dot, i) {
+      dot.addEventListener('click', function () { show(i); start(); });
+    });
+
+    if (play) {
+      play.addEventListener('click', function () {
+        paused = !paused;
+        play.setAttribute('aria-pressed', paused ? 'true' : 'false');
+        play.setAttribute('aria-label', paused ? 'Play the banners' : 'Pause the banners');
+        play.firstElementChild.firstElementChild
+          .setAttribute('href', paused ? '#es-icon-play' : '#es-icon-pause');
+        if (paused) { stop(); } else { start(); }
+      });
+      if (paused) {
+        play.setAttribute('aria-pressed', 'true');
+        play.setAttribute('aria-label', 'Play the banners');
+        play.firstElementChild.firstElementChild.setAttribute('href', '#es-icon-play');
+      }
+    }
+
+    // Nobody should have a banner change out from under them while they are
+    // reading it, tabbing through it, or looking at another tab.
+    hero.addEventListener('mouseenter', stop);
+    hero.addEventListener('mouseleave', start);
+    hero.addEventListener('focusin', stop);
+    hero.addEventListener('focusout', start);
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { stop(); } else { start(); }
+    });
+
+    hero.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { show(at - 1); start(); }
+      else if (e.key === 'ArrowRight') { show(at + 1); start(); }
+    });
+
+    // Swipe, for the stacked layout on a phone.
+    var x0 = null, y0 = null;
+    hero.addEventListener('touchstart', function (e) {
+      x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+    }, { passive: true });
+    hero.addEventListener('touchend', function (e) {
+      if (x0 === null) { return; }
+      var dx = e.changedTouches[0].clientX - x0;
+      var dy = e.changedTouches[0].clientY - y0;
+      if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy)) { show(at + (dx < 0 ? 1 : -1)); start(); }
+      x0 = null; y0 = null;
+    }, { passive: true });
+
+    show(0);
+    start();
+  })();
+
+  // Photo slots: if a photograph has not been supplied yet, fall back to a
+  // styled placeholder that names what belongs there.
+  function markEmpty(img) {
+    var fig = img.parentNode;
+    if (fig && fig.classList) { fig.classList.add('is-empty'); }
+    if (img.parentNode) { img.parentNode.removeChild(img); }
+  }
+  var imgs = document.querySelectorAll('.es-photo img');
+  for (var i = 0; i < imgs.length; i++) {
+    (function (img) {
+      if (img.complete && img.naturalWidth === 0) { markEmpty(img); return; }
+      img.addEventListener('error', function () { markEmpty(img); });
+    })(imgs[i]);
+  }
+
+  // Mobile menu
+  var toggle = document.querySelector('.es-nav-toggle');
+  var nav = document.getElementById('es-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // Entrance animation
+  var reveals = document.querySelectorAll('.es-reveal');
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced || !('IntersectionObserver' in window)) {
+    for (var j = 0; j < reveals.length; j++) { reveals[j].classList.add('is-in'); }
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  for (var k = 0; k < reveals.length; k++) { io.observe(reveals[k]); }
+
+  // Failsafe: never leave content hidden
+  setTimeout(function () {
+    for (var m = 0; m < reveals.length; m++) { reveals[m].classList.add('is-in'); }
+  }, 3000);
+})();
+</script>
+
+<script src="assets/js/christmas-snow.js" defer></script>
+</body>
+</html>

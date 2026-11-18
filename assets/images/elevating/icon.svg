@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- The Elevating Spaces mark as a favicon: the roof with its chimney over
+       the olive branch. Drawn at icon scale with heavier strokes than the
+       header logo, because at 32px the original 2.4 stroke disappears. -->
+  <rect width="64" height="64" rx="12" fill="#fbf8f0"/>
+  <g stroke="#452409" stroke-width="3.4" stroke-linejoin="miter" stroke-linecap="butt" fill="none">
+    <!-- roof -->
+    <path d="M7 41.5v-2.6L31.6 17.4 56.6 38.9v2.6"/>
+    <!-- chimney -->
+    <path d="M43.4 27.2v-6.6h5.9v10.4"/>
+    <!-- the short post at the left eave -->
+    <path d="M13.6 38.2v8.6" stroke-width="4.4"/>
+  </g>
+  <!-- olive branch -->
+  <path d="M19.4 45.8C23.6 43 30.6 39.1 41.4 37.2" fill="none"
+        stroke="#687636" stroke-width="2.3" stroke-linecap="round"/>
+  <g fill="#687636">
+    <path d="M24.6 44.1c-1.2-2.6-.3-5.6 2.1-7.1 1.3 2.6.6 5.7-2.1 7.1Z" fill="#5a6a2b"/>
+    <path d="M31.8 41.1c-1-2.7.1-5.6 2.6-6.9 1.1 2.7.2 5.7-2.6 6.9Z"/>
+    <path d="M39.5 38.4c-.3-2.9 1.6-5.4 4.4-6 .3 2.9-1.6 5.5-4.4 6Z"/>
+    <path d="M26.4 45.6c2.5-1.3 5.6-.5 7.1 1.9-2.5 1.4-5.7.7-7.1-1.9Z" fill="#5a6a2b"/>
+    <path d="M34.6 42.1c2.6-1.1 5.6-.1 6.9 2.4-2.6 1.2-5.7.3-6.9-2.4Z"/>
+  </g>
+</svg>
