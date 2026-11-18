@@ -51,6 +51,18 @@ since there is no hover to reveal it with.
 
 ## Books carousel
 
+Each cover is a plain anchor to its Amazon page with `target="_blank"`, and the browser
+follows it natively. Flickity counts any movement over 3px as a drag and swallows the
+click, which is most trackpad clicks and nearly every tap on a phone, so the carousel is
+initialised with `dragThreshold: 10` to give a press room to wobble.
+
+An earlier version intercepted the press and called `window.open` instead. That was worse
+in two ways, and both are easy to repeat: **`window.open(url, "_blank", "noopener")`
+returns `null` even when it succeeds**, so the popup-blocked fallback behind it fired every
+single time and navigated the current tab to Amazon as well as opening the new one; and
+popup blockers stop `window.open` where they never stop a plain link. Letting the anchor
+be an anchor also restores middle-click, ctrl-click and "copy link address".
+
 The `#books` section replaced the theme's interior-design demo section. Covers live
 in `assets/images/books/`, the markup is five `.lqd-book-slide` blocks in
 `index.html`, and the behaviour is [`assets/js/books-carousel.js`](assets/js/books-carousel.js)
@@ -64,6 +76,17 @@ change the image, title, subtitle and the `https://www.amazon.com/dp/<ASIN>` lin
 
 It's one HTML file — edit `index.html` and push. GitHub Pages redeploys on every
 push to `main`, usually within a minute.
+
+## Forcing HTTPS
+
+Enforce HTTPS is on in the repository Pages settings, so GitHub 301s http to https for both
+`www` and the apex, and the Let's Encrypt certificate covers both names.
+
+Both pages also carry a three-line inline script at the very top of `<head>` that upgrades
+the protocol itself. It is there because **GitHub Pages sends no HSTS header for a custom
+domain**: a page a visitor already has cached over http is served from disk without asking
+the network, so the 301 never runs and the address bar still says "Not secure". The script
+runs inside that cached page and sends it to https. Keep it first in the head.
 
 ## DNS
 

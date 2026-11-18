@@ -2,6 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>
+/* GitHub Pages redirects http to https, but a page already sitting in a
+   browser cache from before that was switched on is served straight from disk
+   without asking the network, so the redirect never runs and the address bar
+   still says "Not secure". GitHub sends no HSTS header for custom domains,
+   which is what would normally pre-empt that, so this does the same job in one
+   line. It must stay first in the head, before anything else loads. */
+if (location.protocol === 'http:' && location.hostname.indexOf('dthewriter.co.za') !== -1) {
+  location.replace('https://' + location.host + location.pathname + location.search + location.hash);
+}
+</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Elevating Spaces &ndash; Thoughtful gifts. Meaningful spaces.</title>
 <meta name="description" content="Elevating Spaces: beautifully curated gift collections, original inspirational canvas art and home styling services from Johannesburg, South Africa.">
@@ -62,6 +74,22 @@
 
 <!-- ============ header ============ -->
 <header class="es-header">
+
+  <!-- Elevating Spaces is a brand page inside D the Writer's site, so there is
+       always a way back to the main site. It rides inside the sticky header,
+       which keeps it reachable however far down the page you are. -->
+  <div class="es-backbar">
+    <div class="es-wrap">
+      <a class="es-back" href="/">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <path d="M9.6 3.3 4.9 8l4.7 4.7" fill="none" stroke="currentColor"
+                stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back to D the Writer
+      </a>
+    </div>
+  </div>
+
   <div class="es-wrap es-header-inner">
 
     <a class="es-brand" href="#top" aria-label="Elevating Spaces, home">

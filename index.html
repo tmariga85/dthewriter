@@ -2,6 +2,18 @@
 <html lang="en">
 
 	<head> <meta charset="UTF-8">
+<script>
+/* GitHub Pages redirects http to https, but a page already sitting in a
+   browser cache from before that was switched on is served straight from disk
+   without asking the network, so the redirect never runs and the address bar
+   still says "Not secure". GitHub sends no HSTS header for custom domains,
+   which is what would normally pre-empt that, so this does the same job in one
+   line. It must stay first in the head, before anything else loads. */
+if (location.protocol === 'http:' && location.hostname.indexOf('dthewriter.co.za') !== -1) {
+  location.replace('https://' + location.host + location.pathname + location.search + location.hash);
+}
+</script>
+
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="keywords" content="South African copywriter, South African ghostwriter, South African publisher, freelance copywriter South Africa, book ghostwriting South Africa, content writing South Africa, website copywriter South Africa, manuscript editing South Africa">
 		<meta name="author" content="Daisy Mariga">

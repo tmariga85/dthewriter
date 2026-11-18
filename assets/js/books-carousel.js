@@ -39,47 +39,27 @@
 			pauseAutoPlayOnHover: true,
 			selectedAttraction: 0.018,
 			friction: 0.22,
-			imagesLoaded: true
+			imagesLoaded: true,
+			// Flickity's default is 3px, which counts most trackpad clicks and
+			// nearly every tap on a phone as a drag and swallows the click.
+			// Ten gives a press room to wobble and still open the book.
+			dragThreshold: 10
 		});
 
-		// --- clicking a cover opens its Amazon page -------------------------
-		// Flickity treats any pointer movement over ~3px as a drag and swallows
-		// the click, which is most trackpad clicks and nearly every tap on a
-		// phone. So the press is handled here instead, with a looser threshold,
-		// and the carousel is held still while a finger is down on it.
-		var downLink = null, downX = 0, downY = 0;
-		var SLOP = 12; // px of wobble still counted as a click, not a drag
+		// Nothing else is needed to open a book: each cover is a real anchor
+		// with target="_blank", so the browser follows it natively. An earlier
+		// version intercepted the press and called window.open instead, which
+		// was worse in two ways -- window.open(url, '_blank', 'noopener')
+		// returns null even when it succeeds, so its popup-blocked fallback
+		// fired every time and navigated this tab to Amazon as well as opening
+		// the new one; and popup blockers stop window.open where they never
+		// stop a plain link. Letting the anchor be an anchor also restores
+		// middle-click, ctrl-click and "copy link address".
 
+		// Hold the carousel still while a finger or cursor is down on a cover.
 		el.addEventListener('pointerdown', function (e) {
-			downLink = e.target.closest ? e.target.closest('a.lqd-book') : null;
-			downX = e.clientX;
-			downY = e.clientY;
-			if (downLink && flkty.player) flkty.stopPlayer();
-		});
-
-		el.addEventListener('pointerup', function (e) {
-			var link = downLink;
-			downLink = null;
-			if (!link || e.button !== 0) return;
-			if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-			var dx = e.clientX - downX;
-			var dy = e.clientY - downY;
-			if (Math.sqrt(dx * dx + dy * dy) > SLOP) return; // genuine drag
-			// some mobile browsers block window.open outside a click handler;
-			// fall back to the same tab rather than doing nothing
-			var opened = window.open(link.href, '_blank', 'noopener');
-			if (!opened) window.location.href = link.href;
-		});
-
-		el.addEventListener('pointercancel', function () { downLink = null; });
-
-		// pointerup already opened it; stop the browser following the href too
-		el.addEventListener('click', function (e) {
 			var link = e.target.closest ? e.target.closest('a.lqd-book') : null;
-			if (!link) return;
-			if (e.detail === 0) return; // keyboard Enter — let the browser do it
-			if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-			e.preventDefault();
+			if (link && flkty.player) flkty.stopPlayer();
 		});
 
 		if (reduced) {

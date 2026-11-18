@@ -102,6 +102,25 @@ body.es-page {
   font-family: var(--es-body); font-size: 14px; color: var(--es-ink);
 }
 
+/* ---------- back to the main site ---------- */
+
+/* A slim strip above the header proper, inside the same sticky block. */
+.es-backbar {
+  background: var(--es-olive-dark);
+  border-bottom: 1px solid rgba(255, 255, 255, .12);
+}
+.es-back {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 0;
+  font-family: var(--es-sans); font-size: 12.5px; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase;
+  color: rgba(238, 240, 228, .88); text-decoration: none;
+  transition: color .2s ease, gap .2s ease;
+}
+.es-back svg { width: 14px; height: 14px; flex: none; }
+.es-back:hover, .es-back:focus-visible { color: #fff; gap: 11px; }
+.es-back:focus-visible { outline: 2px solid var(--es-gold); outline-offset: 3px; }
+
 /* ---------- buttons ---------- */
 
 .es-btn, a.es-btn {
@@ -635,6 +654,8 @@ body.es-page {
   html { scroll-behavior: auto; }
   .es-reveal, .es-reveal.is-in { opacity: 1; transform: none; transition: none; }
   .es-card, .es-btn, .es-slide { transition: none; }
+  .es-back { transition: none; }
+  .es-back:hover { gap: 7px; }
   /* No dissolve; the after is shown and the before stays in the alt text. */
   .es-ba-after { animation: none; opacity: 1; }
   .es-card:hover, .es-btn:hover { transform: none; }
