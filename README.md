@@ -21,6 +21,25 @@ tools/before-after/            the supplied before/after artwork + the script th
 CNAME                          custom domain for GitHub Pages
 ```
 
+## Icons
+
+The main site uses the **DC monogram** from `assets/images/dc-black.svg`;
+[`tools/icons/build-dc-icon.mjs`](tools/icons/build-dc-icon.mjs) lifts the two glyph
+outlines straight out of that logo rather than redrawing them, so the icon cannot drift
+away from the brand, and writes `assets/images/icon-32/180/512.png` plus a real
+`/favicon.ico` at the root. The full lockup is not used: the "DISTINCTIVE CREATIVES"
+band through the middle is an illegible smear at tab size.
+
+Two details are deliberate. The logo is a high-contrast serif whose hairlines fall below
+a pixel at 32px and wash out to pale grey, so **the 32px version is rendered with the
+outline stroked** to carry more weight; the larger sizes are left exactly as drawn. And
+the root `favicon.ico` exists because browsers request it whatever the link tags say —
+without it every page load carried a 404. An ICO may hold a PNG directly, so it is the
+32px image in a 22-byte container.
+
+The Elevating Spaces page overrides all of this with its own roof-and-branch mark — see
+below.
+
 ## Contact forms
 
 GitHub Pages serves static files only, so the WordPress theme's PHP mailer
