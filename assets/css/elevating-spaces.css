@@ -145,8 +145,11 @@ body.es-page {
 }
 .es-hero-art {
   display: block; width: 100%; height: auto;
-  aspect-ratio: 1774 / 887;
-  max-height: 78vh;            /* a tall window must not give a tall banner */
+  /* The artwork is 2:1, but that is a lot of banner on a laptop, so it is
+     shown a little shallower and cropped top and bottom. Only bokeh and
+     marble are lost; the copy band and the products sit well inside. */
+  aspect-ratio: 1774 / 745;
+  max-height: 62vh;            /* a tall window must not give a tall banner */
   object-fit: cover; object-position: center;
 }
 .es-hero-body {
@@ -161,32 +164,32 @@ body.es-page {
 
 .es-hero h1, .es-hero h2 {
   font-family: var(--es-serif); font-weight: 400;
-  font-size: clamp(21px, 4.68vw, 74px); line-height: 1.05;
+  font-size: clamp(20px, 4.26vw, 67px); line-height: 1.05;
   color: #5a3b1c; margin: 0;
 }
 /* Banners 2 and 3 set their first line brown and their second green. */
 .es-slide-2 h2, .es-slide-3 h2 { color: #6b3e11; }
 /* Playfair sets wider than the face in the artwork, so banner 2 comes down
    a touch to keep "Meaningful spaces." on one line clear of the gift box. */
-.es-slide-2 h2 { font-size: clamp(19px, 4.02vw, 63px); }
+.es-slide-2 h2 { font-size: clamp(18px, 3.68vw, 58px); }
 .es-h-green { color: #37520d; }
-.es-slide-3 h2 { font-weight: 600; font-size: clamp(22px, 4.25vw, 67px); }
+.es-slide-3 h2 { font-weight: 600; font-size: clamp(21px, 3.88vw, 61px); }
 
 .es-hero-rule {
   width: 20%; max-width: 146px; height: 2px;
   background: #ac913a; border: 0;
-  margin: clamp(8px, 1.5vw, 26px) auto;
+  margin: clamp(7px, 1.32vw, 23px) auto;
 }
 .es-slide-2 .es-hero-rule { width: 27%; max-width: 176px; background: #8f8a4a; }
 .es-slide-3 .es-hero-rule {
   width: 33%; max-width: 228px; height: 1.5px; background: #cba75e;
-  margin: clamp(8px, 1.55vw, 26px) auto;
+  margin: clamp(7px, 1.38vw, 23px) auto;
 }
 
 .es-hero p {
   font-family: var(--es-serif); font-style: italic;
-  font-size: clamp(11px, 1.67vw, 27px); line-height: 1.42;
-  color: #4a4034; margin: 0 auto clamp(12px, 2.3vw, 38px); max-width: 24em;
+  font-size: clamp(11px, 1.54vw, 25px); line-height: 1.42;
+  color: #4a4034; margin: 0 auto clamp(12px, 2.05vw, 34px); max-width: 24em;
 }
 .es-slide-2 p, .es-slide-3 p { color: #26241f; }
 .es-slide-2 p { max-width: 19em; }
@@ -197,7 +200,7 @@ body.es-page {
 
 /* Banner 3's four categories: icon above a two-line label, hairline between. */
 .es-hero-feats {
-  list-style: none; margin: 0 auto clamp(12px, 2.3vw, 38px); padding: 0;
+  list-style: none; margin: 0 auto clamp(10px, 1.95vw, 32px); padding: 0;
   max-width: 93%;   /* the row stops where the artwork stops it */
   display: grid; grid-template-columns: repeat(4, 1fr);
 }
@@ -209,17 +212,17 @@ body.es-page {
 }
 .es-hero-feats li:first-child { border-left: 0; }
 .es-hero-feats svg {
-  flex: none; width: clamp(18px, 2.9vw, 48px); height: auto; color: #8a6b32;
+  flex: none; width: clamp(18px, 2.62vw, 44px); height: auto; color: #8a6b32;
 }
 .es-hero-feats span {
-  font-family: var(--es-sans); font-size: clamp(8px, 1.33vw, 22px);
+  font-family: var(--es-sans); font-size: clamp(8px, 1.22vw, 20px);
   line-height: 1.2; color: #2b2825;
 }
 
 .es-hero .es-btn {
   align-self: center;
-  font-size: clamp(9px, 1.17vw, 19px); letter-spacing: .12em;
-  padding: clamp(8px, 1.37vw, 22px) clamp(14px, 2.9vw, 47px);
+  font-size: clamp(9px, 1.08vw, 18px); letter-spacing: .12em;
+  padding: clamp(8px, 1.24vw, 20px) clamp(14px, 2.64vw, 43px);
   border-radius: clamp(3px, .45vw, 8px);
 }
 
@@ -450,15 +453,18 @@ body.es-page {
 
 /* Before and after of the same room, dissolving one into the other. Both
    frames are stacked in the same box and only the top one animates, so there
-   is nothing to keep in step. The two tiles are offset in time so they are
-   never mid-fade together. */
+   is nothing to keep in step.
+
+   The two tiles run the same animation with no delay between them, so both
+   rooms show their before together and then turn to their after together —
+   the pair reads as one moment, not two tiles taking turns. Each state is
+   held about four and a half seconds with a short dissolve between. */
 .es-ba .es-ba-shot { position: absolute; inset: 0; }
-.es-ba-after { animation: es-ba-dissolve 11s ease-in-out infinite; }
-.es-home-grid > :last-child .es-ba-after { animation-delay: -5.5s; }
+.es-ba-after { animation: es-ba-dissolve 12s ease-in-out infinite; }
 @keyframes es-ba-dissolve {
-  0%, 9%    { opacity: 0; }
-  41%, 59%  { opacity: 1; }
-  91%, 100% { opacity: 0; }
+  0%, 32%   { opacity: 0; }   /* both befores */
+  44%, 82%  { opacity: 1; }   /* both afters */
+  94%, 100% { opacity: 0; }
 }
 /* Hovering or tabbing in holds the after, so the result can be studied. */
 .es-ba:hover .es-ba-after,

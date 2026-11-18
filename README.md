@@ -118,9 +118,11 @@ four tiles and trims both to a common 3:2 so the two states line up as they fade
 BEFORE and AFTER labels are part of the artwork, which saves the page drawing its own.
 
 The fade is CSS alone &mdash; both frames are stacked in the box and only the top one animates,
-so there is nothing to keep in step. The two tiles are offset by half a cycle so they are
-never mid-fade together, and hovering or tabbing into a tile holds the after, so the result
-can be studied. Under `prefers-reduced-motion` there is no fade: the after is shown and the
+so there is nothing to keep in step. Both tiles run the same animation with no delay between
+them, so the two rooms show their before together and then turn to their after together --
+the pair reads as one moment rather than two tiles taking turns. Each state is held about
+four and a half seconds. Hovering or tabbing into a tile holds the after, so the result can
+be studied. Under `prefers-reduced-motion` there is no fade: the after is shown and the
 before stays in the alt text.
 
 The old `home-living.jpg` and `home-pantry.jpg` were low-resolution crops from a composite
